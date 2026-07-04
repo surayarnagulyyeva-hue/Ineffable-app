@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ineffable — Dil Grameri</title>
+<meta name="description" content="İngilizce ve Rusça gramerini Türkçe açıklamalarla, defter düzeninde öğren.">
+<meta name="theme-color" content="#1c2134">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <header class="app-header">
+    <div class="brand">
+      <img class="brand-mark" src="icons/icon-192.png" alt="Ineffable logosu">
+      <span>
+        Ineffable
+        <small>söze sığmayan gramer</small>
+      </span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-seam">
+      <div class="hero-half en">
+        <span class="cap">English</span>
+        <div class="word">the ineffable</div>
+      </div>
+      <div class="hero-half ru">
+        <span class="cap">Русский</span>
+        <div class="word">невыразимое</div>
+      </div>
+    </div>
+    <p class="hero-note" id="heroNote"></p>
+  </section>
+
+  <div class="install-bar" id="installBar">
+    <span>Ineffable'ı ana ekranına ekle, çevrimdışı da çalışsın.</span>
+    <button id="installBtn">Kur</button>
+  </div>
+
+  <nav class="tabs" id="tabs"></nav>
+  <div class="chips" id="chips"></div>
+  <main class="lesson-list" id="lessonList"></main>
+
+  <p class="footer-note">Ineffable · İngilizce ve Rusça gramer defteri</p>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="notebook" id="notebook"></div>
+</div>
+
+<script src="grammar.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

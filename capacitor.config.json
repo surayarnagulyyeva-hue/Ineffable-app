@@ -1,0 +1,10 @@
+{
+  "appId": "com.ineffable.app",
+  "appName": "Ineffable",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "backgroundColor": "#1c2134",
+  "server": {
+    "androidScheme": "https"
+  }
+}
