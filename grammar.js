@@ -19,7 +19,12 @@ const GRAMMAR_DATA = {
       { id: "conditionals", label: "Koşul Cümleleri", mark: "C" },
       { id: "comparison", label: "Karşılaştırma", mark: "K" },
       { id: "pronouns", label: "Zamirler", mark: "Z" },
-      { id: "prepositions", label: "Edatlar", mark: "E" }
+      { id: "prepositions", label: "Edatlar", mark: "E" },
+      { id: "reported", label: "Aktarılan Cümle", mark: "R" },
+      { id: "verbals", label: "Gerund & Infinitive", mark: "G" },
+      { id: "quantifiers", label: "Miktar Belirteçleri", mark: "Q" },
+      { id: "clauses", label: "İlgi Cümlecikleri", mark: "W" },
+      { id: "adverbs", label: "Zarflar", mark: "D" }
     ],
     lessons: [
       {
@@ -763,6 +768,210 @@ const GRAMMAR_DATA = {
           question: "Boşluğu doldur: “It ___ (rain) all day — the streets are flooded.”",
           hint: "İpucu: Sürecin kendisi ve etkisi vurgulanıyor."
         }
+      },
+      {
+        id: "en-reported-speech",
+        category: "reported",
+        level: "B1",
+        term: "REPORTED SPEECH",
+        pages: [
+          {
+            quickFacts: [
+              "Birinin söylediğini kendi cümlelerimizle aktarmak için kullanılır.",
+              "Zamirler ve zaman genelde bir 'geriye' kayar (present simple → past simple gibi).",
+              "'that' bağlacı çoğu zaman isteğe bağlıdır."
+            ],
+            definition:
+              "Aktarılan cümle (reported speech), birinin söylediği bir sözü doğrudan alıntı yapmadan, kendi cümlemiz içinde aktarmak için kullanılır.",
+            typesLabel: "ZAMAN KAYMASI — 3 ÖRNEK",
+            types: [
+              { name: "Present Simple → Past Simple", def: "\"I work here.\" → He said (that) he worked there.", examples: ["\"I like tea.\" → She said she liked tea."] },
+              { name: "Present Continuous → Past Continuous", def: "\"I am studying.\" → He said he was studying.", examples: ["\"We are waiting.\" → They said they were waiting."] },
+              { name: "Will → Would", def: "\"I will call you.\" → He said he would call me.", examples: ["\"I'll help.\" → She said she would help."] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "Zamanı kaydırmayı unutmak (he said he works yerine he said he worked).",
+              "Zamirleri değiştirmeyi unutmak ('I' → 'he/she' gibi).",
+              "Zaman/yer zarflarını değiştirmeyi unutmak (today → that day, here → there, tomorrow → the next day)."
+            ],
+            moreExamples: [
+              "\"I saw her yesterday.\" → He said he had seen her the day before. (yesterday → the day before)",
+              "Soru aktarımı: \"Where do you live?\" → She asked where I lived. (soru işareti ve devrik yapı kalkar)",
+              "Emir aktarımı: \"Close the door.\" → He told me to close the door."
+            ],
+            tip: "Genel gerçekler ve hâlâ geçerli durumlar aktarılırken zaman kaydırma yapılmayabilir: \"The Earth is round.\" → She said the Earth is round."
+          }
+        ],
+        practice: {
+          question: "Aktar: “I am tired,” she said. → She said that ___",
+          hint: "İpucu: 'am' present continuous/simple ise past'e kayar, zamir de değişir."
+        }
+      },
+      {
+        id: "en-gerunds-infinitives",
+        category: "verbals",
+        level: "B1",
+        term: "GERUND & INFINITIVE",
+        pages: [
+          {
+            quickFacts: [
+              "Gerund, fiilin -ing hâlinin isim gibi kullanılmasıdır (swimming, reading).",
+              "Infinitive, fiilin 'to' ile yalın hâlidir (to swim, to read).",
+              "Hangi fiilden sonra hangisinin geleceği genelde ezbere öğrenilir."
+            ],
+            definition:
+              "Gerund (-ing) ve infinitive (to + fiil), bir fiili isim gibi kullanmanın iki farklı yoludur; bazı fiillerden sonra sadece biri, bazılarından sonra ikisi de kullanılabilir.",
+            typesLabel: "KULLANIM — 3 TİP",
+            types: [
+              { name: "Sadece Gerund alan fiiller", def: "enjoy, avoid, finish, suggest, mind + -ing", examples: ["I enjoy reading.", "She avoided answering the question."] },
+              { name: "Sadece Infinitive alan fiiller", def: "want, decide, hope, plan, promise + to + fiil", examples: ["I want to travel.", "They decided to leave early."] },
+              { name: "İkisini de alan fiiller (anlam değişebilir)", def: "stop, remember, try + -ing / to + fiil", examples: ["He stopped smoking. (bıraktı)", "He stopped to smoke. (durup sigara içmek için)"] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "'enjoy to do' gibi yanlış kombinasyonlar kurmak (doğrusu: enjoy doing).",
+              "'remember/stop/try' gibi anlam değiştiren fiillerde yanlış yapıyı seçmek.",
+              "Edattan sonra infinitive kullanmak (interested to go yerine interested in going — edattan sonra her zaman gerund gelir)."
+            ],
+            moreExamples: [
+              "good at, interested in, afraid of + gerund (edattan sonra her zaman -ing)",
+              "I remember locking the door. (geçmişte kilitlediğimi hatırlıyorum)",
+              "Remember to lock the door! (kilitlemeyi unutma — gelecek bir görev)"
+            ],
+            tip: "Bir edattan (in, at, of, about...) hemen sonra fiil geliyorsa, o fiil her zaman -ing (gerund) hâlinde olur."
+          }
+        ],
+        practice: {
+          question: "Doğru olanı seç: “She suggested ___ (to go / going) to the cinema.”",
+          hint: "İpucu: 'suggest' fiilinden sonra hangi yapı gelir?"
+        }
+      },
+      {
+        id: "en-quantifiers",
+        category: "quantifiers",
+        level: "A2",
+        term: "COUNTABLE & UNCOUNTABLE NOUNS",
+        pages: [
+          {
+            quickFacts: [
+              "Sayılabilir isimler tekil/çoğul olabilir (book/books).",
+              "Sayılamaz isimler çoğul yapılamaz (water, information, advice).",
+              "some/any, much/many, a few/a little gibi miktar belirteçleri isme göre değişir."
+            ],
+            definition:
+              "Sayılabilir isimler tek tek sayılabilen (a book, two books), sayılamaz isimler ise bütün olarak düşünülen ve çoğulu olmayan isimlerdir (water, money, advice).",
+            typesLabel: "MİKTAR BELİRTEÇLERİ — 3 TİP",
+            types: [
+              { name: "Many / Few", def: "Sayılabilir çoğul isimlerle kullanılır.", examples: ["many books", "few friends"] },
+              { name: "Much / Little", def: "Sayılamaz isimlerle kullanılır.", examples: ["much water", "little time"] },
+              { name: "Some / Any", def: "Her iki isim türüyle de kullanılır — some olumlu, any olumsuz/soru cümlelerinde.", examples: ["I have some money.", "Do you have any advice?"] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "Sayılamaz isimleri çoğul yapmak (informations, advices, furnitures — bunlar her zaman tekil kalır).",
+              "'much' ile sayılabilir isim kullanmak (much books yerine many books).",
+              "Soru cümlelerinde 'some' kullanmak (genelde 'any' kullanılır, ama teklif/ricalarda 'some' da olabilir: Would you like some tea?)."
+            ],
+            moreExamples: [
+              "information, advice, furniture, news, luggage — sık kullanılan sayılamaz isimler",
+              "a piece of advice, a bit of information — sayılamaz isimleri 'sayılabilir' hâle getiren kalıplar",
+              "a few = birkaç (yeterli), few = çok az (yetersiz) — anlam farkına dikkat"
+            ],
+            tip: "'a few/a little' olumlu, yeterli bir miktarı; 'few/little' (a'sız) ise yetersiz, az bir miktarı vurgular."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “I don't have ___ (many/much) time today.”",
+          hint: "İpucu: 'time' sayılamaz bir isimdir."
+        }
+      },
+      {
+        id: "en-relative-clauses",
+        category: "clauses",
+        level: "B1",
+        term: "RELATIVE CLAUSES",
+        pages: [
+          {
+            quickFacts: [
+              "İlgi cümlecikleri, bir ismi başka bir cümleyle tanımlamak için kullanılır.",
+              "who insanlar için, which nesneler için, that ikisi için de kullanılabilir.",
+              "İlgi zamiri bazen atlanabilir (defining clause'da nesne konumundaysa)."
+            ],
+            definition:
+              "İlgi cümlecikleri (relative clauses), bir isim hakkında ek bilgi vermek için who, which, that, whose gibi ilgi zamirleriyle kurulan yan cümlelerdir.",
+            typesLabel: "İLGİ ZAMİRLERİ — 3 TİP",
+            types: [
+              { name: "Who", def: "İnsanlar için kullanılır.", examples: ["The man who called you is my uncle."] },
+              { name: "Which", def: "Nesneler ve hayvanlar için kullanılır.", examples: ["The book which I bought is great."] },
+              { name: "Whose", def: "Aitlik/sahiplik bildirir.", examples: ["That's the girl whose dog got lost."] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "İnsanlar için 'which' kullanmak (doğrusu: who ya da that).",
+              "Defining (tanımlayıcı) olmayan cümleciklerde virgülü unutmak.",
+              "İlgi zamirinden sonra gereksiz özne zamiri eklemek (the man who he called yerine the man who called)."
+            ],
+            moreExamples: [
+              "Defining: The woman who lives next door is a doctor. (virgülsüz, tanımlayıcı)",
+              "Non-defining: My brother, who lives in London, is visiting. (virgüllü, ek bilgi)",
+              "that, defining clause'larda who/which yerine kullanılabilir ama non-defining'de kullanılamaz."
+            ],
+            tip: "Cümlenin virgülle mi yoksa virgülsüz mü yazıldığına bak: virgüllüyse ek bilgidir (çıkarılabilir), virgülsüzse tanımlayıcıdır (çıkarılamaz)."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “This is the house ___ I grew up.” (nerede)",
+          hint: "İpucu: Yer bildiren bir ilgi zamiri/zarfı gerekir (where)."
+        }
+      },
+      {
+        id: "en-adverbs",
+        category: "adverbs",
+        level: "A2",
+        term: "ADVERBS OF MANNER & FREQUENCY",
+        pages: [
+          {
+            quickFacts: [
+              "Zarflar, fiili, sıfatı ya da başka bir zarfı niteler.",
+              "Çoğu tarz zarfı, sıfata -ly eklenerek yapılır (quick → quickly).",
+              "Sıklık zarfları (always, usually...) genelde ana fiilden önce, 'be' fiilinden sonra gelir."
+            ],
+            definition:
+              "Zarflar (adverbs), bir eylemin nasıl, ne sıklıkla ya da ne derece yapıldığını anlatan kelimelerdir.",
+            typesLabel: "ZARF TÜRLERİ — 2 TİP",
+            types: [
+              { name: "Tarz Zarfları (Manner)", def: "sıfat + ly — bir eylemin nasıl yapıldığını anlatır.", examples: ["She sings beautifully.", "He drives carefully."] },
+              { name: "Sıklık Zarfları (Frequency)", def: "always, usually, often, sometimes, rarely, never", examples: ["I always drink coffee in the morning.", "She is never late."] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "Düzensiz zarfları -ly ile türetmeye çalışmak (goodly yerine well, hardly farklı bir anlam taşır — 'hard' zaten zarf olarak da kullanılır).",
+              "Sıklık zarfını yanlış yere koymak (I drink always coffee yerine I always drink coffee).",
+              "Sıfat yerine zarf kullanmayı unutmak (she sings beautiful yerine she sings beautifully)."
+            ],
+            moreExamples: [
+              "good → well (düzensiz), fast → fast (değişmez), hard → hard (değişmez, 'hardly' = 'zar zor' anlamına gelir)",
+              "'be' fiiliyle: She is always happy. (be fiilinden SONRA)",
+              "Diğer fiillerle: She always arrives early. (ana fiilden ÖNCE)"
+            ],
+            tip: "Sıklık zarfının yeri kurala bağlıdır: 'be' fiilinden sonra, diğer tüm fiillerden önce gelir."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur (doğru sırayla): “She ___ ___ (always/is) on time.”",
+          hint: "İpucu: 'be' fiiliyle sıklık zarfı nereye gelir?"
+        }
       }
     ]
   },
@@ -782,7 +991,12 @@ const GRAMMAR_DATA = {
       { id: "imperative", label: "Emir Kipi", mark: "И" },
       { id: "comparison", label: "Karşılaştırma", mark: "С" },
       { id: "tense-forms", label: "Zaman Çekimleri", mark: "Б" },
-      { id: "negation", label: "Olumsuzluk & Soru", mark: "О" }
+      { id: "negation", label: "Olumsuzluk & Soru", mark: "О" },
+      { id: "verbs-reflexive", label: "Dönüşlü Fiiller", mark: "Х" },
+      { id: "conjunctions", label: "Bağlaçlar", mark: "Ы" },
+      { id: "possession", label: "Sahiplik", mark: "У" },
+      { id: "time", label: "Zaman İfadeleri", mark: "Т" },
+      { id: "adverbs", label: "Zarflar", mark: "Н" }
     ],
     lessons: [
       {
@@ -1273,6 +1487,212 @@ const GRAMMAR_DATA = {
         practice: {
           question: "Bu cümleyi olumsuz yap: “Я понимаю.” (Anlıyorum.)",
           hint: "İpucu: Fiilden hemen önce 'не' ekle."
+        }
+      },
+      {
+        id: "ru-reflexive-verbs",
+        category: "verbs-reflexive",
+        level: "A2",
+        term: "ВОЗВРАТНЫЕ ГЛАГОЛЫ",
+        pages: [
+          {
+            quickFacts: [
+              "-ся eki, fiilin öznesine dönük bir eylem olduğunu ya da edilgen anlam taşıdığını gösterir.",
+              "Ünsüzden sonra -ся, ünlüden sonra -сь eklenir.",
+              "Bazı fiiller sadece -ся ile var olur, -ся'sız hâlleri kullanılmaz."
+            ],
+            definition:
+              "Dönüşlü fiiller (возвратные глаголы), sonuna -ся/-сь eklenen ve eylemin özneye döndüğünü ya da karşılıklı/edilgen bir anlam taşıdığını gösteren fiillerdir.",
+            typesLabel: "ANLAM — 3 TİP",
+            types: [
+              { name: "Gerçek Dönüşlülük", def: "Eylem doğrudan özneye döner.", examples: ["умываться (yıkanmak) — Я умываюсь. (Kendimi yıkıyorum.)"] },
+              { name: "Karşılıklılık", def: "İki taraf birbirine aynı eylemi yapar.", examples: ["встречаться (buluşmak) — Мы встречаемся завтра."] },
+              { name: "Sadece -ся ile Var Olan Fiiller", def: "-ся'sız hâli anlamsız ya da farklı bir fiildir.", examples: ["нравиться (hoşlanmak)", "бояться (korkmak)", "смеяться (gülmek)"] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "-ся ekini unutmak (умываю yerine умываюсь).",
+              "Ünsüz/ünlüden sonra doğru eki seçmemek (-ся/-сь karışıklığı).",
+              "-ся'lı fiili her zaman edilgen çatı sanmak — bazen sadece dönüşlü ya da karşılıklı anlam taşır."
+            ],
+            moreExamples: [
+              "Я одеваюсь. (Giyiniyorum — ünsüzden sonra -ся)",
+              "Они познакомились вчера. (Dün tanıştılar — ünlüden sonra -сь)",
+              "Дверь открывается. (Kapı açılıyor — edilgen anlam)"
+            ],
+            tip: "-ся her zaman fiilin en sonuna eklenir, çekim eklerinden sonra gelir; asla fiilin ortasına girmez."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “Я всегда ___ (одевать + ся) быстро.” (Hep hızlı giyinirim.)",
+          hint: "İpucu: Özne 'я', fiil ünsüzle bitiyor — doğru eki seç."
+        }
+      },
+      {
+        id: "ru-conjunctions",
+        category: "conjunctions",
+        level: "A2",
+        term: "СОЮЗЫ",
+        pages: [
+          {
+            quickFacts: [
+              "Bağlaçlar iki cümleyi ya da kelimeyi birbirine bağlar.",
+              "и (ve) ekleme, а (ama/oysa) karşıtlık, но (ama) güçlü karşıtlık bildirir.",
+              "потому что (çünkü) sebep, чтобы (için/diye) amaç bildirir."
+            ],
+            definition:
+              "Bağlaçlar (союзы), cümleleri ya da kelime gruplarını anlamca birbirine bağlayan, cümledeki ilişkiyi (ekleme, karşıtlık, sebep, amaç) belirleyen kelimelerdir.",
+            typesLabel: "TÜRLER — 4 TİP",
+            types: [
+              { name: "И (ve)", def: "Ekleme bildirir.", examples: ["Я читаю и пишу. (Okuyorum ve yazıyorum.)"] },
+              { name: "А (ama/oysa)", def: "Hafif karşıtlık/karşılaştırma bildirir.", examples: ["Я люблю чай, а он любит кофе."] },
+              { name: "Но (ama)", def: "Güçlü karşıtlık bildirir.", examples: ["Я устал, но я продолжаю работать."] },
+              { name: "Потому что / Чтобы (çünkü/için)", def: "Sebep ve amaç bildirir.", examples: ["Я учусь, потому что хочу знать русский.", "Я звоню, чтобы узнать новости."] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "и ile а'yı karıştırmak — а her zaman bir karşılaştırma/karşıtlık içerir, и sadece ekler.",
+              "потому что ile так как arasındaki üslup farkını göz ardı etmek.",
+              "чтобы'den sonra fiili yanlış çekimlemek (mastar ya da geçmiş zaman gerekir)."
+            ],
+            moreExamples: [
+              "Она умная, а он добрый. (O -dişil- zeki, o -eril- ise iyi kalpli — karşılaştırma)",
+              "Я не пошёл, потому что было холодно.",
+              "Я купил книгу, чтобы почитать в дороге."
+            ],
+            tip: "'а' bağlacı iki farklı özneyi karşılaştırırken kullanılır — sadece olumsuzluk anlamı taşımaz."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “Я хочу спать, ___ должен работать.” (Uyumak istiyorum ama çalışmam gerek.)",
+          hint: "İpucu: Güçlü bir karşıtlık bağlacı gerekir."
+        }
+      },
+      {
+        id: "ru-possession",
+        category: "possession",
+        level: "A1",
+        term: "У МЕНЯ ЕСТЬ...",
+        pages: [
+          {
+            quickFacts: [
+              "Rusçada İngilizcedeki 'have' fiiline birebir karşılık gelen bir fiil günlük konuşmada kullanılmaz.",
+              "Sahiplik, 'у + kişinin родительный hâli + есть + isim' yapısıyla anlatılır.",
+              "Olumsuzda 'есть' yerine 'нет' kullanılır ve isim родительный hâle geçer."
+            ],
+            definition:
+              "Rusçada sahiplik bildirmek için 'у меня есть...' (bende ... var) yapısı kullanılır — kişi родительный hâlde, sahip olunan şey ise yalın hâlde bulunur.",
+            typesLabel: "YAPI — 3 DURUM",
+            types: [
+              { name: "Olumlu", def: "у + родительный (kişi) + есть + isim (yalın)", examples: ["У меня есть машина. (Arabam var.)"] },
+              { name: "Olumsuz", def: "у + родительный (kişi) + нет + isim (родительный)", examples: ["У меня нет машины. (Arabam yok.)"] },
+              { name: "Soru", def: "У + kişi + есть + isim ?", examples: ["У тебя есть время? (Vaktin var mı?)"] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "'иметь' fiilini günlük konuşmada 'have' gibi kullanmaya çalışmak — bu çok resmi/nadir kullanılır.",
+              "Olumsuzda ismi родительный hâline çevirmeyi unutmak (у меня нет машина yerine у меня нет машины).",
+              "'есть' kelimesini olumsuzda da kullanmaya çalışmak — olumsuzda 'нет' kullanılır."
+            ],
+            moreExamples: [
+              "У неё есть брат. (Onun -dişil- bir erkek kardeşi var.)",
+              "У нас нет денег. (Paramız yok.)",
+              "У вас есть вопросы? (Sorularınız var mı?)"
+            ],
+            tip: "Kişiyi родительный hâle çevirmeyi unutma — bu yapının kalbi budur: я → у меня, ты → у тебя, он → у него."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “___ меня есть книга.” (Bende bir kitap var.)",
+          hint: "İpucu: 'bende' anlamı veren edatla başla."
+        }
+      },
+      {
+        id: "ru-time-expressions",
+        category: "time",
+        level: "A2",
+        term: "КОТОРЫЙ ЧАС?",
+        pages: [
+          {
+            quickFacts: [
+              "Saat sormak için 'Который час?' ya da 'Сколько времени?' denir.",
+              "Saat söylerken saat kelimesi sayıya göre çekimlenir (числительные dersindeki kural).",
+              "Gün, ay ve tarih ifadeleri farklı hâller gerektirir."
+            ],
+            definition:
+              "Zaman ifadeleri, saati, günü ve tarihi sormak ve söylemek için kullanılan kalıplardır — Rusçada bu ifadeler sayı çekimiyle yakından ilişkilidir.",
+            typesLabel: "TEMEL KALIPLAR — 3 TİP",
+            types: [
+              { name: "Saat", def: "Который час? — Сейчас ... час/часа/часов.", examples: ["Который час? — Сейчас три часа. (Saat kaç? — Şu an saat üç.)"] },
+              { name: "Günler", def: "в + винительный hâl ile kullanılır.", examples: ["в понедельник (Pazartesi günü)", "во вторник (Salı günü)"] },
+              { name: "Tarih", def: "Ay родительный hâlde çekimlenir.", examples: ["Какое сегодня число? — Сегодня пятое мая. (Bugün ayın kaçı? — Bugün 5 Mayıs.)"] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "Saat sayısına göre 'час/часа/часов' çekimini karıştırmak (sayılar dersindeki kural burada da geçerlidir).",
+              "Günlerde 'в' edatının hangi hâli gerektirdiğini unutmak (в + винительный: в понедельник).",
+              "Tarih söylerken ayın adını yanlış çekimlemek (родительный hâl gerekir: пятое мая)."
+            ],
+            moreExamples: [
+              "один час, два часа, пять часов — sayı kuralına göre çekim",
+              "по понедельникам (Pazartesileri, her hafta — çoğul edat kalıbı)",
+              "Я родился в 2000 году. (2000 yılında doğdum.)"
+            ],
+            tip: "Ay isimleri tarih ifadelerinde her zaman родительный hâlde kullanılır: 'первое января' (1 Ocak)."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “Сейчас два ___ (час/часа/часов).” (Şu an saat iki.)",
+          hint: "İpucu: 2 sayısından sonra 'час' nasıl çekimlenir?"
+        }
+      },
+      {
+        id: "ru-adverbs",
+        category: "adverbs",
+        level: "A2",
+        term: "НАРЕЧИЯ",
+        pages: [
+          {
+            quickFacts: [
+              "Zarflar, fiilin nasıl yapıldığını anlatır ve genelde çekimlenmez (değişmez kalır).",
+              "Çoğu zarf sıfattan -о ekiyle türetilir.",
+              "Zarflar cümlede genelde fiilden önce ya da cümle başında yer alır."
+            ],
+            definition:
+              "Zarflar (наречия), bir eylemin nasıl, ne zaman ya da ne derece yapıldığını anlatan ve cinsiyet/hâl/sayıya göre değişmeyen sabit kelimelerdir.",
+            typesLabel: "TÜRLER — 3 TİP",
+            types: [
+              { name: "Sıfattan Türeyen Zarflar", def: "sıfat kökü + -о", examples: ["быстрый (hızlı) → быстро (hızlı bir şekilde) — Он быстро бегает."] },
+              { name: "Zaman Zarfları", def: "Ne zaman olduğunu belirtir.", examples: ["сегодня (bugün)", "завтра (yarın)", "всегда (her zaman)"] },
+              { name: "Yer Zarfları", def: "Nerede olduğunu belirtir.", examples: ["здесь (burada)", "там (orada)", "далеко (uzakta)"] }
+            ]
+          },
+          {
+            heading: "DAHA FAZLA — SIK HATALAR & İPUÇLARI",
+            commonMistakes: [
+              "Zarfı sıfat gibi çekimlemeye çalışmak — zarflar değişmez, cinsiyet/hâl almaz.",
+              "Zarf ile kısa sıfat biçimini karıştırmak (быстро zarf, быстрый/быстрая/быстрое sıfat).",
+              "Zarfın cümledeki yerini yanlış seçmek."
+            ],
+            moreExamples: [
+              "хорошо (iyi bir şekilde), плохо (kötü bir şekilde), медленно (yavaşça)",
+              "Она хорошо говорит по-русски. (Rusçayı iyi konuşuyor.)",
+              "Здесь холодно. (Burası soğuk — kişisiz zarf cümlesi)"
+            ],
+            tip: "'-о' ile biten bir kelime cümlede yüklem gibi kullanılıyorsa (Здесь тепло — Burası sıcak), bu aslında bir zarftır, sıfat değil."
+          }
+        ],
+        practice: {
+          question: "Boşluğu doldur: “Он говорит очень ___ (быстрый/быстро).” (Çok hızlı konuşuyor.)",
+          hint: "İpucu: Fiili nasıl yaptığını anlatan bir zarf gerekir."
         }
       }
     ]
