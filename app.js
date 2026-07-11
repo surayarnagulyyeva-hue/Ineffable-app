@@ -59,12 +59,27 @@
     });
   }
 
+  const LEVEL_RANK = { A1: 0, A2: 1, B1: 2, B2: 3, C1: 4, C2: 5 };
+
+  function sortedLessons(data, categoryFilter){
+    const categoryOrder = {};
+    data.categories.forEach(function(c, i){ categoryOrder[c.id] = i; });
+
+    return data.lessons
+      .filter(function(l){ return categoryFilter === "all" || l.category === categoryFilter; })
+      .slice()
+      .sort(function(a, b){
+        const catDiff = (categoryOrder[a.category] || 0) - (categoryOrder[b.category] || 0);
+        if(catDiff !== 0) return catDiff;
+        const lvlDiff = (LEVEL_RANK[a.level] || 0) - (LEVEL_RANK[b.level] || 0);
+        return lvlDiff;
+      });
+  }
+
   function renderList(){
     listEl.innerHTML = "";
     const data = currentLangData();
-    const lessons = data.lessons.filter(function(l){
-      return state.category === "all" || l.category === state.category;
-    });
+    const lessons = sortedLessons(data, state.category);
 
     if(lessons.length === 0){
       const empty = document.createElement("p");
@@ -76,19 +91,34 @@
       return;
     }
 
+    let lastCategory = null;
+    const showHeaders = state.category === "all";
+
     lessons.forEach(function(lesson){
+      if(showHeaders && lesson.category !== lastCategory){
+        lastCategory = lesson.category;
+        const catInfo = data.categories.find(function(c){ return c.id === lesson.category; });
+        if(catInfo){
+          const header = document.createElement("div");
+          header.className = "list-section-header";
+          header.innerHTML = '<span class="mark">' + catInfo.mark + "</span>" + catInfo.label;
+          listEl.appendChild(header);
+        }
+      }
+
       const card = document.createElement("button");
       card.className = "lesson-card";
       card.innerHTML =
         '<span class="lc-left">' +
           '<span class="lc-term">' + lesson.term + "</span>" +
-          '<span class="lc-def">' + lesson.definition + "</span>" +
+          '<span class="lc-def">' + lesson.pages[0].definition + "</span>" +
         "</span>" +
         '<span class="level-badge">' + lesson.level + "</span>";
       card.addEventListener("click", function(){ openLesson(lesson); });
       listEl.appendChild(card);
     });
   }
+
 
   function renderHeroNote(){
     const data = currentLangData();

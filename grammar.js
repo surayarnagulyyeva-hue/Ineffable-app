@@ -12,19 +12,19 @@ const GRAMMAR_DATA = {
     accent: "gold",
     categories: [
       { id: "nouns", label: "İsimler", mark: "N" },
-      { id: "tenses", label: "Zamanlar", mark: "T" },
+      { id: "pronouns", label: "Zamirler", mark: "Z" },
       { id: "articles", label: "Artikeller", mark: "A" },
+      { id: "quantifiers", label: "Miktar Belirteçleri", mark: "Q" },
+      { id: "tenses", label: "Zamanlar", mark: "T" },
       { id: "modals", label: "Kip Fiilleri", mark: "M" },
       { id: "voice", label: "Edilgen Çatı", mark: "V" },
       { id: "conditionals", label: "Koşul Cümleleri", mark: "C" },
       { id: "comparison", label: "Karşılaştırma", mark: "K" },
-      { id: "pronouns", label: "Zamirler", mark: "Z" },
       { id: "prepositions", label: "Edatlar", mark: "E" },
-      { id: "reported", label: "Aktarılan Cümle", mark: "R" },
+      { id: "adverbs", label: "Zarflar", mark: "D" },
       { id: "verbals", label: "Gerund & Infinitive", mark: "G" },
-      { id: "quantifiers", label: "Miktar Belirteçleri", mark: "Q" },
       { id: "clauses", label: "İlgi Cümlecikleri", mark: "W" },
-      { id: "adverbs", label: "Zarflar", mark: "D" }
+      { id: "reported", label: "Aktarılan Cümle", mark: "R" }
     ],
     lessons: [
       {
@@ -981,22 +981,22 @@ const GRAMMAR_DATA = {
     native: "Русский",
     accent: "crimson",
     categories: [
-      { id: "cases", label: "Hâller (Падежи)", mark: "П" },
-      { id: "aspect", label: "Fiil Görünüşü", mark: "В" },
       { id: "gender", label: "Cinsiyet", mark: "Р" },
-      { id: "motion", label: "Hareket Fiilleri", mark: "Д" },
-      { id: "adjectives", label: "Sıfatlar", mark: "К" },
       { id: "pronouns", label: "Zamirler", mark: "М" },
+      { id: "cases", label: "Hâller (Падежи)", mark: "П" },
+      { id: "adjectives", label: "Sıfatlar", mark: "К" },
       { id: "numbers", label: "Sayılar", mark: "Ч" },
-      { id: "imperative", label: "Emir Kipi", mark: "И" },
-      { id: "comparison", label: "Karşılaştırma", mark: "С" },
-      { id: "tense-forms", label: "Zaman Çekimleri", mark: "Б" },
-      { id: "negation", label: "Olumsuzluk & Soru", mark: "О" },
-      { id: "verbs-reflexive", label: "Dönüşlü Fiiller", mark: "Х" },
-      { id: "conjunctions", label: "Bağlaçlar", mark: "Ы" },
       { id: "possession", label: "Sahiplik", mark: "У" },
-      { id: "time", label: "Zaman İfadeleri", mark: "Т" },
-      { id: "adverbs", label: "Zarflar", mark: "Н" }
+      { id: "aspect", label: "Fiil Görünüşü", mark: "В" },
+      { id: "tense-forms", label: "Zaman Çekimleri", mark: "Б" },
+      { id: "motion", label: "Hareket Fiilleri", mark: "Д" },
+      { id: "verbs-reflexive", label: "Dönüşlü Fiiller", mark: "Х" },
+      { id: "imperative", label: "Emir Kipi", mark: "И" },
+      { id: "negation", label: "Olumsuzluk & Soru", mark: "О" },
+      { id: "comparison", label: "Karşılaştırma", mark: "С" },
+      { id: "adverbs", label: "Zarflar", mark: "Н" },
+      { id: "conjunctions", label: "Bağlaçlar", mark: "Ы" },
+      { id: "time", label: "Zaman İfadeleri", mark: "Т" }
     ],
     lessons: [
       {
