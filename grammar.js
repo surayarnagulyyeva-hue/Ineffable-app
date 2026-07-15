@@ -333,10 +333,10 @@ const GRAMMAR_DATA = {
             typesLabel: "KİP FİİLLERİ — 5 TİP",
             types: [
               { name: "Can / Could", def: "Yetenek ya da izin bildirir.", examples: ["She can swim.", "Could I borrow your pen?"] },
-              { name: "Must", def: "Güçlü zorunluluk bildirir.", examples: ["You must wear a seatbelt."] },
-              { name: "Should", def: "Tavsiye bildirir.", examples: ["You should see a doctor."] },
+              { name: "Must", def: "Güçlü zorunluluk bildirir.", examples: ["You must wear a seatbelt.", "Passengers must fasten their seatbelts during takeoff."] },
+              { name: "Should", def: "Tavsiye bildirir.", examples: ["You should see a doctor.", "We should leave now to catch the train."] },
               { name: "May / Might", def: "Olasılık ya da resmi izin bildirir.", examples: ["It may rain later.", "May I come in?"] },
-              { name: "Will", def: "Gelecek zaman ya da kararlılık bildirir.", examples: ["I will call you tomorrow."] }
+              { name: "Will", def: "Gelecek zaman ya da kararlılık bildirir.", examples: ["I will call you tomorrow.", "She will help you with the paperwork."] }
             ]
           },
           {
@@ -375,9 +375,9 @@ const GRAMMAR_DATA = {
               "Edilgen çatı (passive voice), eylemi yapanın değil, eylemden etkilenenin cümlenin öznesi olduğu yapıdır.",
             typesLabel: "ZAMANA GÖRE — 3 ÖRNEK",
             types: [
-              { name: "Present Simple Passive", def: "am/is/are + 3. hâl fiil", examples: ["The letter is written by her."] },
-              { name: "Past Simple Passive", def: "was/were + 3. hâl fiil", examples: ["The house was built in 1990."] },
-              { name: "Present Perfect Passive", def: "have/has been + 3. hâl fiil", examples: ["The work has been completed."] }
+              { name: "Present Simple Passive", def: "am/is/are + 3. hâl fiil", examples: ["The letter is written by her.", "This product is made in Germany."] },
+              { name: "Past Simple Passive", def: "was/were + 3. hâl fiil", examples: ["The house was built in 1990.", "The window was broken during the storm."] },
+              { name: "Present Perfect Passive", def: "have/has been + 3. hâl fiil", examples: ["The work has been completed.", "The documents have been signed."] }
             ]
           },
           {
@@ -416,9 +416,9 @@ const GRAMMAR_DATA = {
               "Koşul cümleleri (conditionals), bir eylemin gerçekleşmesinin başka bir eyleme bağlı olduğu durumları anlatır.",
             typesLabel: "KOŞUL TİPLERİ — 3 TİP",
             types: [
-              { name: "Zero Conditional", def: "If + present simple, present simple — genel gerçekler.", examples: ["If you heat ice, it melts."] },
-              { name: "First Conditional", def: "If + present simple, will + fiil — gerçekleşmesi mümkün durumlar.", examples: ["If it rains, I will stay home."] },
-              { name: "Second Conditional", def: "If + past simple, would + fiil — hayali/gerçek dışı durumlar.", examples: ["If I won the lottery, I would travel the world."] }
+              { name: "Zero Conditional", def: "If + present simple, present simple — genel gerçekler.", examples: ["If you heat ice, it melts.", "If you don't sleep enough, you feel tired."] },
+              { name: "First Conditional", def: "If + present simple, will + fiil — gerçekleşmesi mümkün durumlar.", examples: ["If it rains, I will stay home.", "If she studies hard, she will pass the exam."] },
+              { name: "Second Conditional", def: "If + past simple, would + fiil — hayali/gerçek dışı durumlar.", examples: ["If I won the lottery, I would travel the world.", "If I had more money, I would buy a new car."] }
             ]
           },
           {
@@ -457,8 +457,8 @@ const GRAMMAR_DATA = {
               "Karşılaştırma sıfatları, iki ya da daha fazla şeyi kıyaslamak için kullanılır: comparative iki şeyi, superlative bir grubun en üstününü belirtir.",
             typesLabel: "YAPI — 3 TİP",
             types: [
-              { name: "Comparative (kısa sıfat)", def: "sıfat + er + than", examples: ["This book is cheaper than that one."] },
-              { name: "Comparative (uzun sıfat)", def: "more + sıfat + than", examples: ["This film is more interesting than the last one."] },
+              { name: "Comparative (kısa sıfat)", def: "sıfat + er + than", examples: ["This book is cheaper than that one.", "Her car is faster than mine."] },
+              { name: "Comparative (uzun sıfat)", def: "more + sıfat + than", examples: ["This film is more interesting than the last one.", "This exercise is more difficult than the previous one."] },
               { name: "Superlative", def: "the + sıfat-est / the most + sıfat", examples: ["She is the tallest in her class.", "It's the most expensive hotel in town."] }
             ]
           },
@@ -622,8 +622,8 @@ const GRAMMAR_DATA = {
             typesLabel: "YAPI — 3 DURUM",
             types: [
               { name: "Olumlu", def: "Özne + had + 3. hâl fiil", examples: ["I had finished dinner when she arrived.", "They had already left."] },
-              { name: "Olumsuz", def: "Özne + had + not + 3. hâl fiil", examples: ["She had not (hadn't) seen the movie before."] },
-              { name: "Soru", def: "Had + özne + 3. hâl fiil ?", examples: ["Had you met him before that day?"] }
+              { name: "Olumsuz", def: "Özne + had + not + 3. hâl fiil", examples: ["She had not (hadn't) seen the movie before.", "They had not (hadn't) finished the project by the deadline."] },
+              { name: "Soru", def: "Had + özne + 3. hâl fiil ?", examples: ["Had you met him before that day?", "Had she ever traveled abroad before that trip?"] }
             ]
           },
           {
@@ -662,9 +662,9 @@ const GRAMMAR_DATA = {
               "Future Continuous, gelecekte belirli bir zamanda devam ediyor olacak eylemleri anlatmak için kullanılır.",
             typesLabel: "YAPI — 3 DURUM",
             types: [
-              { name: "Olumlu", def: "Özne + will be + fiil-ing", examples: ["This time tomorrow, I will be flying to Moscow."] },
-              { name: "Olumsuz", def: "Özne + will not (won't) be + fiil-ing", examples: ["She won't be working on Sunday."] },
-              { name: "Soru", def: "Will + özne + be + fiil-ing ?", examples: ["Will you be using the car tonight?"] }
+              { name: "Olumlu", def: "Özne + will be + fiil-ing", examples: ["This time tomorrow, I will be flying to Moscow.", "At 8 pm, we will be having dinner."] },
+              { name: "Olumsuz", def: "Özne + will not (won't) be + fiil-ing", examples: ["She won't be working on Sunday.", "I won't be attending the meeting tomorrow."] },
+              { name: "Soru", def: "Will + özne + be + fiil-ing ?", examples: ["Will you be using the car tonight?", "Will they be staying at the hotel next week?"] }
             ]
           },
           {
@@ -703,9 +703,9 @@ const GRAMMAR_DATA = {
               "Future Perfect, gelecekteki belirli bir zaman noktasına kadar tamamlanmış olacak eylemleri anlatmak için kullanılır.",
             typesLabel: "YAPI — 3 DURUM",
             types: [
-              { name: "Olumlu", def: "Özne + will have + 3. hâl fiil", examples: ["By 2030, I will have finished my degree."] },
-              { name: "Olumsuz", def: "Özne + will not (won't) have + 3. hâl fiil", examples: ["They won't have arrived by then."] },
-              { name: "Soru", def: "Will + özne + have + 3. hâl fiil ?", examples: ["Will you have finished the report by Friday?"] }
+              { name: "Olumlu", def: "Özne + will have + 3. hâl fiil", examples: ["By 2030, I will have finished my degree.", "By next month, she will have completed the training."] },
+              { name: "Olumsuz", def: "Özne + will not (won't) have + 3. hâl fiil", examples: ["They won't have arrived by then.", "We won't have finished painting the house by Friday."] },
+              { name: "Soru", def: "Will + özne + have + 3. hâl fiil ?", examples: ["Will you have finished the report by Friday?", "Will he have graduated by next summer?"] }
             ]
           },
           {
@@ -744,9 +744,9 @@ const GRAMMAR_DATA = {
               "Present Perfect Continuous, geçmişte başlayan ve ya hâlâ devam eden ya da yeni bitmiş ama etkisi süren eylemleri, süreye vurgu yaparak anlatır.",
             typesLabel: "YAPI — 3 DURUM",
             types: [
-              { name: "Olumlu", def: "Özne + have/has been + fiil-ing", examples: ["I have been studying Russian for two years."] },
-              { name: "Olumsuz", def: "Özne + have/has not been + fiil-ing", examples: ["She hasn't been feeling well lately."] },
-              { name: "Soru", def: "Have/Has + özne + been + fiil-ing ?", examples: ["Have you been waiting long?"] }
+              { name: "Olumlu", def: "Özne + have/has been + fiil-ing", examples: ["I have been studying Russian for two years.", "They have been working on this project since March."] },
+              { name: "Olumsuz", def: "Özne + have/has not been + fiil-ing", examples: ["She hasn't been feeling well lately.", "He hasn't been sleeping well this week."] },
+              { name: "Soru", def: "Have/Has + özne + been + fiil-ing ?", examples: ["Have you been waiting long?", "Has she been studying all day?"] }
             ]
           },
           {
@@ -785,9 +785,9 @@ const GRAMMAR_DATA = {
               "Aktarılan cümle (reported speech), birinin söylediği bir sözü doğrudan alıntı yapmadan, kendi cümlemiz içinde aktarmak için kullanılır.",
             typesLabel: "ZAMAN KAYMASI — 3 ÖRNEK",
             types: [
-              { name: "Present Simple → Past Simple", def: "\"I work here.\" → He said (that) he worked there.", examples: ["\"I like tea.\" → She said she liked tea."] },
-              { name: "Present Continuous → Past Continuous", def: "\"I am studying.\" → He said he was studying.", examples: ["\"We are waiting.\" → They said they were waiting."] },
-              { name: "Will → Would", def: "\"I will call you.\" → He said he would call me.", examples: ["\"I'll help.\" → She said she would help."] }
+              { name: "Present Simple → Past Simple", def: "\"I work here.\" → He said (that) he worked there.", examples: ["\"I like tea.\" → She said she liked tea.", "\"I live in Moscow.\" → He said he lived in Moscow."] },
+              { name: "Present Continuous → Past Continuous", def: "\"I am studying.\" → He said he was studying.", examples: ["\"We are waiting.\" → They said they were waiting.", "\"I am cooking dinner.\" → She said she was cooking dinner."] },
+              { name: "Will → Would", def: "\"I will call you.\" → He said he would call me.", examples: ["\"I'll help.\" → She said she would help.", "\"I'll be there at six.\" → He said he would be there at six."] }
             ]
           },
           {
@@ -908,9 +908,9 @@ const GRAMMAR_DATA = {
               "İlgi cümlecikleri (relative clauses), bir isim hakkında ek bilgi vermek için who, which, that, whose gibi ilgi zamirleriyle kurulan yan cümlelerdir.",
             typesLabel: "İLGİ ZAMİRLERİ — 3 TİP",
             types: [
-              { name: "Who", def: "İnsanlar için kullanılır.", examples: ["The man who called you is my uncle."] },
-              { name: "Which", def: "Nesneler ve hayvanlar için kullanılır.", examples: ["The book which I bought is great."] },
-              { name: "Whose", def: "Aitlik/sahiplik bildirir.", examples: ["That's the girl whose dog got lost."] }
+              { name: "Who", def: "İnsanlar için kullanılır.", examples: ["The man who called you is my uncle.", "I know a woman who speaks five languages."] },
+              { name: "Which", def: "Nesneler ve hayvanlar için kullanılır.", examples: ["The book which I bought is great.", "The movie which we watched last night was amazing."] },
+              { name: "Whose", def: "Aitlik/sahiplik bildirir.", examples: ["That's the girl whose dog got lost.", "He's the boy whose bike was stolen."] }
             ]
           },
           {
@@ -1015,12 +1015,12 @@ const GRAMMAR_DATA = {
               "Hâller (padejler), bir ismin cümle içindeki görevini (özne, nesne, aitlik, yön vb.) gösteren çekim biçimleridir.",
             typesLabel: "HÂLLER — 6 TİP",
             types: [
-              { name: "Именительный (Yalın Hâl)", def: "Kim? Ne? — cümlenin öznesi.", examples: ["Это книга. (Bu bir kitap.)"] },
-              { name: "Родительный (Belirtme/Aitlik)", def: "Kimin? Neyin? — sahiplik ve yokluk bildirir.", examples: ["У меня нет книги. (Kitabım yok.)"] },
-              { name: "Дательный (Yönelme Hâli)", def: "Kime? Neye? — bir şeyin verildiği kişi.", examples: ["Я дал книгу другу. (Kitabı arkadaşıma verdim.)"] },
-              { name: "Винительный (-i Hâli)", def: "Kimi? Neyi? — doğrudan nesne.", examples: ["Я читаю книгу. (Kitabı okuyorum.)"] },
-              { name: "Творительный (Araç Hâli)", def: "Kiminle? Ne ile? — araç ya da birliktelik.", examples: ["Я пишу ручкой. (Kalemle yazıyorum.)"] },
-              { name: "Предложный (Yer/Konu Hâli)", def: "Kimde? Nerede? Ne hakkında?", examples: ["Книга на столе. (Kitap masanın üzerinde.)"] }
+              { name: "Именительный (Yalın Hâl)", def: "Kim? Ne? — cümlenin öznesi.", examples: ["Это книга. (Bu bir kitap.)", "Мама дома. (Anne evde.)"] },
+              { name: "Родительный (Belirtme/Aitlik)", def: "Kimin? Neyin? — sahiplik ve yokluk bildirir.", examples: ["У меня нет книги. (Kitabım yok.)", "Это дом моего друга. (Bu arkadaşımın evi.)"] },
+              { name: "Дательный (Yönelme Hâli)", def: "Kime? Neye? — bir şeyin verildiği kişi.", examples: ["Я дал книгу другу. (Kitabı arkadaşıma verdim.)", "Я звоню маме. (Anneme telefon ediyorum.)"] },
+              { name: "Винительный (-i Hâli)", def: "Kimi? Neyi? — doğrudan nesne.", examples: ["Я читаю книгу. (Kitabı okuyorum.)", "Я вижу собаку. (Köpeği görüyorum.)"] },
+              { name: "Творительный (Araç Hâli)", def: "Kiminle? Ne ile? — araç ya da birliktelik.", examples: ["Я пишу ручкой. (Kalemle yazıyorum.)", "Он гордится сыном. (Oğluyla gurur duyuyor.)"] },
+              { name: "Предложный (Yer/Konu Hâli)", def: "Kimde? Nerede? Ne hakkında?", examples: ["Книга на столе. (Kitap masanın üzerinde.)", "Мы говорим о фильме. (Film hakkında konuşuyoruz.)"] }
             ]
           },
           {
@@ -1059,8 +1059,8 @@ const GRAMMAR_DATA = {
               "Fiil görünüşü (вид), bir eylemin tamamlanıp tamamlanmadığını ya da devam edip etmediğini gösteren temel bir Rusça dilbilgisi kategorisidir.",
             typesLabel: "GÖRÜNÜŞ — 2 TİP",
             types: [
-              { name: "Несовершенный вид (Tamamlanmamış)", def: "Süreci, tekrarı ya da alışkanlığı vurgular.", examples: ["Я писал письмо. (Mektup yazıyordum — süreç.)"] },
-              { name: "Совершенный вид (Tamamlanmış)", def: "Sonucu ya da tek seferlik tamamlanmış eylemi vurgular.", examples: ["Я написал письмо. (Mektubu yazdım — bitti.)"] }
+              { name: "Несовершенный вид (Tamamlanmamış)", def: "Süreci, tekrarı ya da alışkanlığı vurgular.", examples: ["Я писал письмо. (Mektup yazıyordum — süreç.)", "Она читала весь день. (Bütün gün okuyordu — süreç.)"] },
+              { name: "Совершенный вид (Tamamlanmış)", def: "Sonucu ya da tek seferlik tamamlanmış eylemi vurgular.", examples: ["Я написал письмо. (Mektubu yazdım — bitti.)", "Она прочитала книгу за час. (Kitabı bir saatte okuyup bitirdi.)"] }
             ]
           },
           {
@@ -1180,9 +1180,9 @@ const GRAMMAR_DATA = {
               "Rusçada sıfatlar (прилагательные), tanımladıkları ismin cinsiyetine, sayısına ve hâline göre çekimlenir — Türkçedeki gibi değişmez kalmazlar.",
             typesLabel: "TEKİL ÇEKİM — 3 TİP",
             types: [
-              { name: "Мужской род (Eril)", def: "Genelde -ый / -ий ile biter.", examples: ["новый дом (yeni ev)"] },
-              { name: "Женский род (Dişil)", def: "Genelde -ая / -яя ile biter.", examples: ["новая книга (yeni kitap)"] },
-              { name: "Средний род (Nötr)", def: "Genelde -ое / -ее ile biter.", examples: ["новое окно (yeni pencere)"] }
+              { name: "Мужской род (Eril)", def: "Genelde -ый / -ий ile biter.", examples: ["новый дом (yeni ev)", "красивый парк (güzel park)"] },
+              { name: "Женский род (Dişil)", def: "Genelde -ая / -яя ile biter.", examples: ["новая книга (yeni kitap)", "красивая девушка (güzel kız)"] },
+              { name: "Средний род (Nötr)", def: "Genelde -ое / -ее ile biter.", examples: ["новое окно (yeni pencere)", "красивое озеро (güzel göl)"] }
             ]
           },
           {
@@ -1384,7 +1384,7 @@ const GRAMMAR_DATA = {
             types: [
               { name: "Eril özne (он)", def: "Fiil kökü + -л", examples: ["он читал (o okudu)", "он был (o -eril- idi)"] },
               { name: "Dişil özne (она)", def: "Fiil kökü + -ла", examples: ["она читала (o okudu)", "она была (o -dişil- idi)"] },
-              { name: "Nötr özne (оно)", def: "Fiil kökü + -ло", examples: ["оно было (o -nötr- idi)"] },
+              { name: "Nötr özne (оно)", def: "Fiil kökü + -ло", examples: ["оно было (o -nötr- idi)", "оно стояло на столе (o -nötr- masanın üzerinde duruyordu)"] },
               { name: "Çoğul (мы/вы/они)", def: "Fiil kökü + -ли", examples: ["они читали (onlar okudu)", "мы были (biz idik)"] }
             ]
           },
@@ -1424,8 +1424,8 @@ const GRAMMAR_DATA = {
               "Gelecek zaman (будущее время), fiilin görünüşüne (aspect) göre iki farklı biçimde kurulur: tamamlanmamış fiillerle bileşik, tamamlanmış fiillerle basit yapı.",
             typesLabel: "YAPI — 2 TİP",
             types: [
-              { name: "Bileşik Gelecek (Несов. вид)", def: "буду/будешь/будет... + mastar — süreç vurgusu.", examples: ["Я буду читать книгу. (Kitap okuyacağım — süreç.)"] },
-              { name: "Basit Gelecek (Сов. вид)", def: "Tamamlanmış fiilin şimdiki zaman gibi çekimi — sonuç vurgusu.", examples: ["Я прочитаю книгу. (Kitabı okuyup bitireceğim.)"] }
+              { name: "Bileşik Gelecek (Несов. вид)", def: "буду/будешь/будет... + mastar — süreç vurgusu.", examples: ["Я буду читать книгу. (Kitap okuyacağım — süreç.)", "Мы будем работать завтра. (Yarın çalışacağız — süreç.)"] },
+              { name: "Basit Gelecek (Сов. вид)", def: "Tamamlanmış fiilin şimdiki zaman gibi çekimi — sonuç vurgusu.", examples: ["Я прочитаю книгу. (Kitabı okuyup bitireceğim.)", "Мы сделаем это завтра. (Yarın bunu yapıp bitireceğiz.)"] }
             ]
           },
           {
@@ -1505,8 +1505,8 @@ const GRAMMAR_DATA = {
               "Dönüşlü fiiller (возвратные глаголы), sonuna -ся/-сь eklenen ve eylemin özneye döndüğünü ya da karşılıklı/edilgen bir anlam taşıdığını gösteren fiillerdir.",
             typesLabel: "ANLAM — 3 TİP",
             types: [
-              { name: "Gerçek Dönüşlülük", def: "Eylem doğrudan özneye döner.", examples: ["умываться (yıkanmak) — Я умываюсь. (Kendimi yıkıyorum.)"] },
-              { name: "Karşılıklılık", def: "İki taraf birbirine aynı eylemi yapar.", examples: ["встречаться (buluşmak) — Мы встречаемся завтра."] },
+              { name: "Gerçek Dönüşlülük", def: "Eylem doğrudan özneye döner.", examples: ["умываться (yıkanmak) — Я умываюсь. (Kendimi yıkıyorum.)", "причёсываться (saçını taramak) — Она причёсывается. (Saçını tarıyor.)"] },
+              { name: "Karşılıklılık", def: "İki taraf birbirine aynı eylemi yapar.", examples: ["встречаться (buluşmak) — Мы встречаемся завтра.", "обниматься (sarılmak) — Они обнимаются. (Birbirlerine sarılıyorlar.)"] },
               { name: "Sadece -ся ile Var Olan Fiiller", def: "-ся'sız hâli anlamsız ya da farklı bir fiildir.", examples: ["нравиться (hoşlanmak)", "бояться (korkmak)", "смеяться (gülmek)"] }
             ]
           },
@@ -1546,9 +1546,9 @@ const GRAMMAR_DATA = {
               "Bağlaçlar (союзы), cümleleri ya da kelime gruplarını anlamca birbirine bağlayan, cümledeki ilişkiyi (ekleme, karşıtlık, sebep, amaç) belirleyen kelimelerdir.",
             typesLabel: "TÜRLER — 4 TİP",
             types: [
-              { name: "И (ve)", def: "Ekleme bildirir.", examples: ["Я читаю и пишу. (Okuyorum ve yazıyorum.)"] },
-              { name: "А (ama/oysa)", def: "Hafif karşıtlık/karşılaştırma bildirir.", examples: ["Я люблю чай, а он любит кофе."] },
-              { name: "Но (ama)", def: "Güçlü karşıtlık bildirir.", examples: ["Я устал, но я продолжаю работать."] },
+              { name: "И (ve)", def: "Ekleme bildirir.", examples: ["Я читаю и пишу. (Okuyorum ve yazıyorum.)", "Он поёт и танцует. (Şarkı söylüyor ve dans ediyor.)"] },
+              { name: "А (ama/oysa)", def: "Hafif karşıtlık/karşılaştırma bildirir.", examples: ["Я люблю чай, а он любит кофе.", "Летом жарко, а зимой холодно. (Yazın sıcak, kışın ise soğuk.)"] },
+              { name: "Но (ama)", def: "Güçlü karşıtlık bildirir.", examples: ["Я устал, но я продолжаю работать.", "Она маленькая, но сильная. (O küçük ama güçlü.)"] },
               { name: "Потому что / Чтобы (çünkü/için)", def: "Sebep ve amaç bildirir.", examples: ["Я учусь, потому что хочу знать русский.", "Я звоню, чтобы узнать новости."] }
             ]
           },
@@ -1588,9 +1588,9 @@ const GRAMMAR_DATA = {
               "Rusçada sahiplik bildirmek için 'у меня есть...' (bende ... var) yapısı kullanılır — kişi родительный hâlde, sahip olunan şey ise yalın hâlde bulunur.",
             typesLabel: "YAPI — 3 DURUM",
             types: [
-              { name: "Olumlu", def: "у + родительный (kişi) + есть + isim (yalın)", examples: ["У меня есть машина. (Arabam var.)"] },
-              { name: "Olumsuz", def: "у + родительный (kişi) + нет + isim (родительный)", examples: ["У меня нет машины. (Arabam yok.)"] },
-              { name: "Soru", def: "У + kişi + есть + isim ?", examples: ["У тебя есть время? (Vaktin var mı?)"] }
+              { name: "Olumlu", def: "у + родительный (kişi) + есть + isim (yalın)", examples: ["У меня есть машина. (Arabam var.)", "У них есть дети. (Çocukları var.)"] },
+              { name: "Olumsuz", def: "у + родительный (kişi) + нет + isim (родительный)", examples: ["У меня нет машины. (Arabam yok.)", "У него нет собаки. (Köpeği yok.)"] },
+              { name: "Soru", def: "У + kişi + есть + isim ?", examples: ["У тебя есть время? (Vaktin var mı?)", "У вас есть ручка? (Kaleminiz var mı?)"] }
             ]
           },
           {
@@ -1629,9 +1629,9 @@ const GRAMMAR_DATA = {
               "Zaman ifadeleri, saati, günü ve tarihi sormak ve söylemek için kullanılan kalıplardır — Rusçada bu ifadeler sayı çekimiyle yakından ilişkilidir.",
             typesLabel: "TEMEL KALIPLAR — 3 TİP",
             types: [
-              { name: "Saat", def: "Который час? — Сейчас ... час/часа/часов.", examples: ["Который час? — Сейчас три часа. (Saat kaç? — Şu an saat üç.)"] },
+              { name: "Saat", def: "Который час? — Сейчас ... час/часа/часов.", examples: ["Который час? — Сейчас три часа. (Saat kaç? — Şu an saat üç.)", "Сколько времени? — Уже полночь. (Saat kaç? — Gece yarısı oldu.)"] },
               { name: "Günler", def: "в + винительный hâl ile kullanılır.", examples: ["в понедельник (Pazartesi günü)", "во вторник (Salı günü)"] },
-              { name: "Tarih", def: "Ay родительный hâlde çekimlenir.", examples: ["Какое сегодня число? — Сегодня пятое мая. (Bugün ayın kaçı? — Bugün 5 Mayıs.)"] }
+              { name: "Tarih", def: "Ay родительный hâlde çekimlenir.", examples: ["Какое сегодня число? — Сегодня пятое мая. (Bugün ayın kaçı? — Bugün 5 Mayıs.)", "Мой день рождения в марте. (Doğum günüm Mart ayında.)"] }
             ]
           },
           {
@@ -1670,7 +1670,7 @@ const GRAMMAR_DATA = {
               "Zarflar (наречия), bir eylemin nasıl, ne zaman ya da ne derece yapıldığını anlatan ve cinsiyet/hâl/sayıya göre değişmeyen sabit kelimelerdir.",
             typesLabel: "TÜRLER — 3 TİP",
             types: [
-              { name: "Sıfattan Türeyen Zarflar", def: "sıfat kökü + -о", examples: ["быстрый (hızlı) → быстро (hızlı bir şekilde) — Он быстро бегает."] },
+              { name: "Sıfattan Türeyen Zarflar", def: "sıfat kökü + -о", examples: ["быстрый (hızlı) → быстро (hızlı bir şekilde) — Он быстро бегает.", "тихий (sessiz) → тихо (sessizce) — Дети играли тихо."] },
               { name: "Zaman Zarfları", def: "Ne zaman olduğunu belirtir.", examples: ["сегодня (bugün)", "завтра (yarın)", "всегда (her zaman)"] },
               { name: "Yer Zarfları", def: "Nerede olduğunu belirtir.", examples: ["здесь (burada)", "там (orada)", "далеко (uzakta)"] }
             ]

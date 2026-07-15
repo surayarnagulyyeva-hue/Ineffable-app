@@ -1,0 +1,849 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap");
+
+:root{
+  --ink:#1c2134;
+  --ink-soft:#242a44;
+  --ink-line:#343c60;
+  --paper:#f4efe1;
+  --paper-line:#e3dcc8;
+  --text:#eae7dd;
+  --muted:#8b8f9c;
+  --gold:#c9a227;
+  --crimson:#b23a48;
+  --ink-text:#2b2620;
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    radial-gradient(1px 1px at 20% 15%, rgba(234,231,221,0.35), transparent),
+    radial-gradient(1px 1px at 65% 8%, rgba(234,231,221,0.25), transparent),
+    radial-gradient(1.5px 1.5px at 85% 22%, rgba(201,162,39,0.3), transparent),
+    radial-gradient(1px 1px at 40% 35%, rgba(234,231,221,0.2), transparent),
+    radial-gradient(1.5px 1.5px at 10% 60%, rgba(178,58,72,0.25), transparent),
+    radial-gradient(1px 1px at 90% 70%, rgba(234,231,221,0.2), transparent),
+    var(--ink);
+  background-attachment:fixed;
+  color:var(--text);
+  font-family:"Inter",sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+
+/* ---------- App shell ---------- */
+.app-shell{
+  max-width:960px;
+  margin:0 auto;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.app-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 20px 0;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:"PT Serif",serif;
+  font-weight:700;
+  font-size:22px;
+  letter-spacing:0.02em;
+}
+.brand-mark{
+  width:30px;
+  height:30px;
+  border-radius:8px;
+  object-fit:cover;
+}
+.brand small{
+  display:block;
+  font-family:"IBM Plex Mono",monospace;
+  font-weight:500;
+  font-size:10px;
+  letter-spacing:0.18em;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-top:2px;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  padding:36px 20px 24px;
+  position:relative;
+}
+.hero-seam{
+  display:flex;
+  border:1px solid var(--ink-line);
+  border-radius:14px;
+  overflow:hidden;
+  position:relative;
+}
+.hero-half{
+  flex:1;
+  padding:26px 18px;
+  position:relative;
+}
+.hero-half.en{background:linear-gradient(160deg,#1b1e29,#181a24);}
+.hero-half.ru{background:linear-gradient(200deg,#1b1e29,#181a24);}
+.hero-half .word{
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-size:clamp(22px,5vw,32px);
+  line-height:1.15;
+}
+.hero-half.en .word{color:var(--gold);}
+.hero-half.ru .word{color:var(--crimson);}
+.hero-half .cap{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:8px;
+  display:block;
+}
+.hero-seam::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:1px;
+  background:repeating-linear-gradient(180deg,var(--ink-line) 0 6px,transparent 6px 12px);
+}
+.hero-note{
+  margin:14px 4px 0;
+  font-size:13.5px;
+  color:var(--muted);
+  line-height:1.5;
+  max-width:56ch;
+}
+
+/* ---------- Tabs ---------- */
+.tabs{
+  display:flex;
+  gap:8px;
+  padding:8px 20px 0;
+}
+.tab-btn{
+  flex:1;
+  border:1px solid var(--ink-line);
+  background:var(--ink-soft);
+  color:var(--muted);
+  border-radius:10px;
+  padding:11px 10px;
+  font-size:13px;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:border-color .15s,color .15s;
+}
+.tab-btn .dot{width:8px;height:8px;border-radius:50%;background:var(--muted);}
+.tab-btn.active{color:var(--text);}
+.tab-btn.active[data-lang="en"]{border-color:var(--gold);}
+.tab-btn.active[data-lang="en"] .dot{background:var(--gold);}
+.tab-btn.active[data-lang="ru"]{border-color:var(--crimson);}
+.tab-btn.active[data-lang="ru"] .dot{background:var(--crimson);}
+
+/* ---------- Category chips ---------- */
+.chips{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:16px 20px 4px;
+  scrollbar-width:none;
+}
+.chips::-webkit-scrollbar{display:none;}
+.chip{
+  flex:0 0 auto;
+  border:1px solid var(--ink-line);
+  background:transparent;
+  color:var(--muted);
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:12.5px;
+  font-weight:500;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+.chip .mark{
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-size:13px;
+}
+.chip.active{background:var(--ink-soft);color:var(--text);border-color:var(--ink-line);}
+
+/* ---------- Lesson list ---------- */
+/* ---------- View switch (Dersler/Pratik) ---------- */
+.view-switch{
+  display:flex;
+  gap:8px;
+  padding:10px 20px 0;
+}
+.view-btn{
+  flex:1;
+  background:none;
+  border:none;
+  border-bottom:2px solid transparent;
+  color:var(--muted);
+  padding:10px 4px;
+  font-size:13.5px;
+  font-weight:600;
+}
+.view-btn.active{
+  color:var(--text);
+  border-bottom-color:var(--gold);
+}
+
+/* ---------- Progress badge on lesson card ---------- */
+.progress-badge{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  font-weight:600;
+  padding:3px 7px;
+  border-radius:6px;
+  flex:0 0 auto;
+  margin-left:6px;
+}
+.progress-badge.full{
+  background:rgba(46,160,90,0.18);
+  color:#4fd17a;
+}
+.progress-badge.partial{
+  background:rgba(201,162,39,0.18);
+  color:var(--gold);
+}
+
+/* ---------- Practice dashboard ---------- */
+.practice-dashboard{
+  padding:14px 20px 4px;
+}
+.pd-stats{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+}
+.pd-stat{
+  flex:1;
+  border:1px solid var(--ink-line);
+  background:var(--ink-soft);
+  border-radius:12px;
+  padding:12px;
+  text-align:center;
+}
+.pd-stat .num{
+  font-family:"PT Serif",serif;
+  font-weight:700;
+  font-size:22px;
+  color:var(--gold);
+  display:block;
+}
+.pd-stat .lbl{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:2px;
+  display:block;
+}
+.pd-mix-btn{
+  width:100%;
+  background:var(--gold);
+  color:#12141c;
+  border:none;
+  border-radius:12px;
+  padding:14px;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+.pd-mix-btn:disabled{
+  opacity:0.4;
+}
+
+/* ---------- Practice lesson row (in Pratik view) ---------- */
+.practice-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border:1px solid var(--ink-line);
+  background:var(--ink-soft);
+  border-radius:12px;
+  padding:13px 14px;
+  margin-bottom:8px;
+}
+.practice-row .pr-term{
+  font-family:"PT Serif",serif;
+  font-weight:700;
+  font-size:14.5px;
+}
+.practice-row .pr-btn{
+  background:none;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  border-radius:8px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:600;
+  flex:0 0 auto;
+}
+
+
+.list-section-header{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:14px 2px 4px;
+}
+.list-section-header:first-child{
+  padding-top:2px;
+}
+.list-section-header .mark{
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-size:14px;
+  color:var(--gold);
+}
+
+.lesson-list{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  padding:14px 20px 40px;
+}
+.lesson-card{
+  border:1px solid var(--ink-line);
+  background:var(--ink-soft);
+  border-radius:12px;
+  padding:15px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  text-align:left;
+  width:100%;
+}
+.lesson-card:hover{border-color:var(--muted);}
+.lesson-card .lc-left{display:flex;flex-direction:column;gap:4px;}
+.lesson-card .lc-term{
+  font-family:"PT Serif",serif;
+  font-weight:700;
+  font-size:16px;
+  letter-spacing:0.01em;
+}
+.lesson-card .lc-def{
+  font-size:12.5px;
+  color:var(--muted);
+  max-width:44ch;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.level-badge{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  letter-spacing:0.06em;
+  padding:4px 8px;
+  border-radius:6px;
+  border:1px solid var(--ink-line);
+  color:var(--muted);
+  flex:0 0 auto;
+}
+
+/* ---------- Notebook lesson page (overlay) — dark manuscript theme ---------- */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(6,7,12,0.72);
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+  z-index:50;
+  backdrop-filter:blur(3px);
+}
+.overlay.open{display:flex;}
+.notebook{
+  width:100%;
+  max-width:640px;
+  max-height:92vh;
+  overflow-y:auto;
+  background:linear-gradient(175deg,#20263e 0%,#181c2f 55%,#141726 100%);
+  color:var(--text);
+  border-radius:20px 20px 0 0;
+  padding:0 0 40px;
+  position:relative;
+  border-top:1px solid var(--ink-line);
+}
+@media(min-width:760px){
+  .overlay{align-items:center;}
+  .notebook{border-radius:18px;max-height:88vh;border:1px solid var(--ink-line);}
+}
+.notebook-inner{padding:22px 22px 0;}
+.notebook-inner::before{
+  content:"";
+  display:block;
+  height:3px;
+  border-radius:3px;
+  margin:-22px -22px 20px;
+  background:linear-gradient(90deg,var(--gold),var(--crimson));
+}
+.nb-close{
+  position:sticky;
+  top:14px;
+  float:right;
+  background:var(--ink-soft);
+  border:1px solid var(--ink-line);
+  border-radius:50%;
+  width:32px;
+  height:32px;
+  font-size:16px;
+  color:var(--text);
+  z-index:2;
+}
+.nb-level{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  letter-spacing:0.16em;
+  color:#12141c;
+  background:var(--gold);
+  padding:3px 9px;
+  border-radius:999px;
+  margin-bottom:14px;
+  display:inline-block;
+  font-weight:700;
+}
+.nb-term-box{
+  display:block;
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-weight:700;
+  font-size:30px;
+  color:var(--gold);
+  line-height:1.2;
+  margin-bottom:6px;
+  letter-spacing:0.01em;
+}
+.nb-term-box::after{
+  content:"";
+  display:block;
+  width:56px;
+  height:2px;
+  margin-top:10px;
+  background:linear-gradient(90deg,var(--crimson),transparent);
+}
+.nb-term-box.small{
+  font-size:21px;
+  margin-bottom:10px;
+}
+.nb-facts{
+  list-style:none;
+  padding:0;
+  margin:18px 0 18px;
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-size:15.5px;
+  line-height:1.65;
+  color:#d8d4c8;
+}
+.nb-facts li{
+  padding-left:18px;
+  position:relative;
+  margin-bottom:6px;
+}
+.nb-facts li::before{
+  content:"♦";
+  position:absolute;
+  left:0;
+  color:var(--gold);
+  font-size:10px;
+  top:5px;
+}
+.nb-def{
+  border-left:3px solid var(--gold);
+  background:rgba(201,162,39,0.08);
+  border-radius:0 8px 8px 0;
+  padding:12px 16px;
+  margin:0 0 22px;
+  font-size:15px;
+  line-height:1.6;
+  color:var(--text);
+}
+.nb-types-label{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10.5px;
+  letter-spacing:0.16em;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:14px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--ink-line);
+}
+.nb-type{
+  display:flex;
+  gap:12px;
+  margin-bottom:18px;
+}
+.nb-type .arrow{
+  font-family:"PT Serif",serif;
+  font-size:16px;
+  color:var(--crimson);
+  flex:0 0 auto;
+  margin-top:1px;
+}
+.nb-type .body{flex:1;}
+.nb-type .name{
+  font-weight:700;
+  color:var(--text);
+  font-size:15px;
+  border-bottom:1.5px solid var(--crimson);
+  padding-bottom:2px;
+}
+.nb-type .def{font-size:13.5px;margin:5px 0 6px;color:var(--muted);}
+.nb-type .ex{
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-size:15px;
+  color:#e8c96a;
+}
+.nb-subheading{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  letter-spacing:0.14em;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:18px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--ink-line);
+}
+.nb-block-label{
+  font-family:"PT Serif",serif;
+  font-weight:700;
+  font-style:italic;
+  font-size:15px;
+  margin:18px 0 10px;
+  color:var(--gold);
+}
+.nb-mistakes,.nb-more-examples{
+  list-style:none;
+  padding:0;
+  margin:0 0 6px;
+  font-size:14px;
+  line-height:1.65;
+}
+.nb-mistakes li{
+  padding-left:20px;
+  position:relative;
+  margin-bottom:9px;
+  color:#c9c5b8;
+}
+.nb-mistakes li::before{
+  content:"\2717";
+  position:absolute;
+  left:0;
+  color:var(--crimson);
+  font-size:12px;
+  top:3px;
+}
+.nb-more-examples li{
+  font-family:"PT Serif",serif;
+  font-style:italic;
+  font-size:15px;
+  color:#e8c96a;
+  padding-left:18px;
+  position:relative;
+  margin-bottom:7px;
+}
+.nb-more-examples li::before{
+  content:"+";
+  position:absolute;
+  left:0;
+  color:var(--gold);
+  font-weight:700;
+}
+.nb-tip{
+  margin-top:16px;
+  padding:14px 16px;
+  background:rgba(201,162,39,0.1);
+  border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;
+  font-size:14px;
+  line-height:1.6;
+  color:#d8d4c8;
+}
+.nb-tip-label{
+  display:block;
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:5px;
+  font-weight:700;
+}
+
+.nb-pager{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:24px;
+  padding-top:16px;
+  border-top:1px solid var(--ink-line);
+}
+.nb-pager-btn{
+  background:none;
+  border:1px solid var(--ink-line);
+  color:var(--text);
+  border-radius:8px;
+  padding:8px 12px;
+  font-size:12.5px;
+  font-weight:600;
+}
+.nb-pager-btn:disabled{
+  opacity:0.25;
+}
+.nb-pager-dots{
+  display:flex;
+  gap:6px;
+}
+.nb-pager-dots .dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--ink-line);
+  display:inline-block;
+}
+.nb-pager-dots .dot.active{
+  background:var(--crimson);
+}
+.nb-practice{
+  margin-top:22px;
+  border:1.5px dashed var(--crimson);
+  background:rgba(178,58,72,0.07);
+  border-radius:10px;
+  padding:16px 16px;
+  position:relative;
+}
+.nb-practice .label{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:10px;
+  letter-spacing:0.12em;
+  color:var(--crimson);
+  text-transform:uppercase;
+  display:block;
+  margin-bottom:8px;
+  font-weight:700;
+}
+.nb-practice .q{font-size:15px;line-height:1.55;margin-bottom:10px;color:var(--text);}
+.nb-hint-btn{
+  background:none;
+  border:1px solid var(--crimson);
+  color:var(--crimson);
+  border-radius:8px;
+  font-size:12px;
+  padding:7px 11px;
+  font-weight:600;
+}
+.nb-hint{
+  display:none;
+  margin-top:10px;
+  font-size:13px;
+  color:var(--muted);
+  font-style:italic;
+}
+.nb-hint.shown{display:block;}
+
+/* ---------- Quiz screen (inside notebook overlay) — dark theme ---------- */
+.quiz-progress{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:11px;
+  letter-spacing:0.1em;
+  color:var(--muted);
+  margin-bottom:12px;
+  text-transform:uppercase;
+}
+.quiz-question{
+  font-family:"PT Serif",serif;
+  font-size:18px;
+  line-height:1.55;
+  margin-bottom:20px;
+  color:var(--text);
+}
+.quiz-options{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  margin-bottom:16px;
+}
+.quiz-option{
+  text-align:left;
+  border:1.5px solid var(--ink-line);
+  background:var(--ink-soft);
+  border-radius:10px;
+  padding:13px 14px;
+  font-size:14.5px;
+  color:var(--text);
+}
+.quiz-option.correct{
+  border-color:#3fbd72;
+  background:rgba(63,189,114,0.14);
+}
+.quiz-option.wrong{
+  border-color:var(--crimson);
+  background:rgba(178,58,72,0.14);
+}
+.quiz-tf{
+  display:flex;
+  gap:10px;
+  margin-bottom:16px;
+}
+.quiz-tf button{
+  flex:1;
+  border:1.5px solid var(--ink-line);
+  background:var(--ink-soft);
+  border-radius:10px;
+  padding:13px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--text);
+}
+.quiz-tf button.correct{
+  border-color:#3fbd72;
+  background:rgba(63,189,114,0.14);
+}
+.quiz-tf button.wrong{
+  border-color:var(--crimson);
+  background:rgba(178,58,72,0.14);
+}
+.quiz-self-reveal{
+  border:1px solid var(--ink-line);
+  background:var(--ink-soft);
+  border-radius:10px;
+  padding:13px 14px;
+  margin-bottom:14px;
+  font-size:14px;
+  color:#d8d4c8;
+  display:none;
+}
+.quiz-self-reveal.shown{ display:block; }
+.quiz-self-buttons{
+  display:none;
+  gap:10px;
+}
+.quiz-self-buttons.shown{ display:flex; }
+.quiz-self-buttons button{
+  flex:1;
+  border-radius:10px;
+  padding:12px;
+  font-size:13.5px;
+  font-weight:600;
+  border:1.5px solid var(--ink-line);
+  background:var(--ink-soft);
+  color:var(--text);
+}
+.quiz-next-btn{
+  width:100%;
+  background:var(--gold);
+  color:#12141c;
+  border:none;
+  border-radius:10px;
+  padding:14px;
+  font-size:14px;
+  font-weight:700;
+  margin-top:6px;
+}
+.quiz-next-btn:disabled{
+  opacity:0.3;
+  background:var(--ink-line);
+  color:var(--muted);
+}
+.quiz-result{
+  text-align:center;
+  padding:24px 10px 10px;
+}
+.quiz-result .score{
+  font-family:"PT Serif",serif;
+  font-weight:700;
+  font-size:44px;
+  background:linear-gradient(90deg,var(--gold),var(--crimson));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  margin-bottom:8px;
+}
+.quiz-result .msg{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:22px;
+}
+.quiz-result button{
+  width:100%;
+  border-radius:10px;
+  padding:14px;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:8px;
+  border:none;
+}
+.quiz-result .retry-btn{
+  background:var(--gold);
+  color:#12141c;
+}
+.quiz-result .close-btn{
+  background:none;
+  border:1.5px solid var(--ink-line);
+  color:var(--text);
+}
+
+/* ---------- Install banner ---------- */
+.install-bar{
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin:0 20px 14px;
+  padding:12px 14px;
+  border:1px solid var(--ink-line);
+  border-radius:12px;
+  background:var(--ink-soft);
+  font-size:12.5px;
+  color:var(--muted);
+}
+.install-bar.show{display:flex;}
+.install-bar button{
+  background:var(--gold);
+  color:#12141c;
+  border:none;
+  border-radius:8px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:600;
+  flex:0 0 auto;
+}
+
+.footer-note{
+  text-align:center;
+  font-size:11px;
+  color:var(--ink-line);
+  padding:10px 20px 30px;
+}
+
+@media (prefers-reduced-motion:no-preference){
+  .lesson-card,.tab-btn,.chip{transition:all .15s ease;}
+}
