@@ -1,4 +1,4 @@
-const CACHE_NAME = "ineffable-v8";
+const CACHE_NAME = "ineffable-v9";
 const ASSETS = [
   "./",
   "./index.html",
