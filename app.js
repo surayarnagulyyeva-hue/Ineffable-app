@@ -42,6 +42,38 @@
     saveProgress(p);
   }
 
+  // ---------- Streak tracking ----------
+  const STREAK_KEY = "ineffable_streak_v1";
+
+  function loadStreakData(){
+    try{ return JSON.parse(localStorage.getItem(STREAK_KEY)) || { streak: 0, lastDate: null }; }
+    catch(e){ return { streak: 0, lastDate: null }; }
+  }
+  function saveStreakData(d){
+    try{ localStorage.setItem(STREAK_KEY, JSON.stringify(d)); }
+    catch(e){ /* storage unavailable, ignore */ }
+  }
+  function getStreak(){
+    return loadStreakData().streak;
+  }
+  function updateStreak(){
+    const data = loadStreakData();
+    const today = new Date().toDateString();
+
+    if(data.lastDate === today) return data.streak; // bugün zaten sayıldı
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yStr = yesterday.toDateString();
+
+    let streak;
+    if(data.lastDate === yStr) streak = data.streak + 1; // seri devam ediyor
+    else streak = 1; // ara verilmiş, yeniden başla
+
+    saveStreakData({ streak: streak, lastDate: today });
+    return streak;
+  }
+
   // ---------- Quiz generation (built from existing lesson data) ----------
   function shuffle(arr){
     const a = arr.slice();
@@ -322,6 +354,20 @@
     heroNoteEl.textContent = notes[state.lang] || "";
   }
 
+  function renderStreak(){
+    let badge = document.getElementById("streakBadge");
+    if(!badge){
+      badge = document.createElement("div");
+      badge.id = "streakBadge";
+      badge.className = "streak-badge";
+      if(heroNoteEl && heroNoteEl.parentNode){
+        heroNoteEl.parentNode.insertBefore(badge, heroNoteEl);
+      }
+    }
+    const streak = getStreak();
+    badge.textContent = streak > 0 ? "🔥 " + streak + " günlük seri" : "";
+  }
+
   let currentLesson = null;
   let currentPage = 0;
 
@@ -449,6 +495,7 @@
     renderChips();
     renderList();
     renderHeroNote();
+    renderStreak();
   }
 
   // ---------- Quiz runtime ----------
@@ -632,6 +679,7 @@
     }
   });
 
+  updateStreak();
   renderAll();
 
   // ---------- PWA: service worker + install prompt ----------
