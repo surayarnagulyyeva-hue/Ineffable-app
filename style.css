@@ -856,7 +856,8 @@ button{font-family:inherit;cursor:pointer;}
 }
 
 @media (prefers-reduced-motion:no-preference){
-  .lesson-card,.tab-btn,.chip{transition:all .15s ease;}
+  .lesson-card,.tab-btn,.chip transition: border-color .15s ease, color .15s ease, transform .1s ease;
+}
   }
 /* ---------- Mobile overflow fix ---------- */
 html,body{
@@ -872,5 +873,5 @@ html,body{
 }
 .hero-half .word,.nb-term-box,.quiz-question,.lc-term,.nb-def,.nb-facts,.nb-tip,.lc-def{
   overflow-wrap:break-word;
-  word-break:break-word;
+  overflow-wrap:break-word;
 }
