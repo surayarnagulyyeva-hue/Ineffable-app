@@ -1,4 +1,4 @@
-const CACHE_NAME = "ineffable-v10"; // ← Her güncellemede +1 arttır!
+const CACHE_NAME = "ineffable-v11";
 const ASSETS = [
   "./",
   "./index.html",
@@ -15,7 +15,7 @@ self.addEventListener("install", function(event){
     caches.open(CACHE_NAME).then(function(cache){
       return cache.addAll(ASSETS);
     }).catch(function(err){
-      console.error("Cache oluşturulamadı:", err);
+      console.error("Cache olusturulamadi:", err);
     })
   );
   self.skipWaiting();
@@ -39,7 +39,6 @@ self.addEventListener("fetch", function(event){
   event.respondWith(
     fetch(event.request)
       .then(function(response){
-        // Sadece geçerli yanıtları cache'le
         if(!response || response.status !== 200 || response.type !== "basic"){
           return response;
         }
@@ -47,7 +46,7 @@ self.addEventListener("fetch", function(event){
         caches.open(CACHE_NAME).then(function(cache){
           cache.put(event.request, copy);
         }).catch(function(err){
-          console.warn("Cache'e yazılamadı:", err);
+          console.warn("Cache'e yazilamadi:", err);
         });
         return response;
       })
