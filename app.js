@@ -16,6 +16,17 @@
   const viewSwitchEl = document.getElementById("viewSwitch");
   const practiceDashboardEl = document.getElementById("practiceDashboard");
 
+  // ---------- XSS Korumalı HTML Escape ----------
+  function escapeHtml(str){
+    if(str == null) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
   // ---------- Progress storage ----------
   const STORAGE_KEY = "ineffable_progress_v1";
 
@@ -60,21 +71,21 @@
     const data = loadStreakData();
     const today = new Date().toDateString();
 
-    if(data.lastDate === today) return data.streak; // bugün zaten sayıldı
+    if(data.lastDate === today) return data.streak;
 
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yStr = yesterday.toDateString();
 
     let streak;
-    if(data.lastDate === yStr) streak = data.streak + 1; // seri devam ediyor
-    else streak = 1; // ara verilmiş, yeniden başla
+    if(data.lastDate === yStr) streak = data.streak + 1;
+    else streak = 1;
 
     saveStreakData({ streak: streak, lastDate: today });
     return streak;
   }
 
-  // ---------- Quiz generation (built from existing lesson data) ----------
+  // ---------- Quiz generation ----------
   function shuffle(arr){
     const a = arr.slice();
     for(let i = a.length - 1; i > 0; i--){
@@ -99,7 +110,7 @@
       type: "mcq",
       lessonId: lesson.id,
       lessonTerm: lesson.term,
-      question: "Aşağıdakilerden hangisi '" + target.name + "' türüne bir örnektir?",
+      question: "Aşağıdakilerden hangisi '" + escapeHtml(target.name) + "' türüne bir örnektir?",
       options: shuffle(options),
       answer: correct
     };
@@ -117,7 +128,7 @@
       type: "tf",
       lessonId: lesson.id,
       lessonTerm: lesson.term,
-      question: "'" + types[idxA].name + "' şu şekilde kurulur/anlatılır: " + defUsed,
+      question: "'" + escapeHtml(types[idxA].name) + "' şu şekilde kurulur/anlatılır: " + escapeHtml(defUsed),
       answer: isTrue
     };
   }
@@ -152,8 +163,71 @@
   }
 
   function currentLangData(){
+    // grammar.js yüklenmezse güvenli fallback
+    if(typeof GRAMMAR_DATA === "undefined" || !GRAMMAR_DATA){
+      console.error("GRAMMAR_DATA yüklenemedi!");
+      return { label: "?", categories: [], lessons: [] };
+    }
     return GRAMMAR_DATA[state.lang];
   }
+
+  // ---------- Event Delegation — Tek Seferlik Listener ----------
+  // Tab'lar için event delegation
+  tabsEl.addEventListener("click", function(e){
+    const btn = e.target.closest(".tab-btn");
+    if(!btn) return;
+    state.lang = btn.dataset.lang;
+    state.category = "all";
+    renderAll();
+  });
+
+  // View switch için event delegation
+  viewSwitchEl.addEventListener("click", function(e){
+    const btn = e.target.closest(".view-btn");
+    if(!btn) return;
+    state.view = btn.dataset.view;
+    state.category = "all";
+    renderAll();
+  });
+
+  // Chips için event delegation
+  chipsEl.addEventListener("click", function(e){
+    const chip = e.target.closest(".chip");
+    if(!chip) return;
+    state.category = chip.dataset.cat || "all";
+    renderAll();
+  });
+
+  // Practice dashboard — event delegation
+  practiceDashboardEl.addEventListener("click", function(e){
+    const btn = e.target.closest("#pdMixBtn");
+    if(!btn) return;
+    const data = currentLangData();
+    const lessons = sortedLessons(data, state.category);
+    if(lessons.length === 0) return;
+    const qs = buildMixedQuiz(lessons);
+    startQuiz(qs);
+  });
+
+  // Lesson list — event delegation
+  listEl.addEventListener("click", function(e){
+    const card = e.target.closest(".lesson-card");
+    if(!card) return;
+    const lessonId = card.dataset.lessonId;
+    const data = currentLangData();
+    const lesson = data.lessons.find(function(l){ return l.id === lessonId; });
+    if(lesson) openLesson(lesson);
+  });
+
+  // Practice rows — event delegation
+  listEl.addEventListener("click", function(e){
+    const btn = e.target.closest(".pr-btn");
+    if(!btn) return;
+    const lessonId = btn.dataset.lessonId;
+    const data = currentLangData();
+    const lesson = data.lessons.find(function(l){ return l.id === lessonId; });
+    if(lesson) startQuiz(buildQuizForLesson(lesson));
+  });
 
   function renderTabs(){
     tabsEl.innerHTML = "";
@@ -162,12 +236,7 @@
       const btn = document.createElement("button");
       btn.className = "tab-btn" + (state.lang === langKey ? " active" : "");
       btn.dataset.lang = langKey;
-      btn.innerHTML = '<span class="dot"></span>' + data.label + " Grameri";
-      btn.addEventListener("click", function(){
-        state.lang = langKey;
-        state.category = "all";
-        renderAll();
-      });
+      btn.innerHTML = '<span class="dot"></span>' + escapeHtml(data.label) + " Grameri";
       tabsEl.appendChild(btn);
     });
   }
@@ -176,11 +245,6 @@
     const btns = viewSwitchEl.querySelectorAll(".view-btn");
     btns.forEach(function(btn){
       btn.classList.toggle("active", btn.dataset.view === state.view);
-      btn.onclick = function(){
-        state.view = btn.dataset.view;
-        state.category = "all";
-        renderAll();
-      };
     });
   }
 
@@ -190,21 +254,15 @@
 
     const allChip = document.createElement("button");
     allChip.className = "chip" + (state.category === "all" ? " active" : "");
-    allChip.innerHTML = '<span class="mark">*</span> Tümü';
-    allChip.addEventListener("click", function(){
-      state.category = "all";
-      renderAll();
-    });
+    allChip.dataset.cat = "all";
+    allChip.innerHTML = '<span class="mark">✦</span> Tümü';
     chipsEl.appendChild(allChip);
 
     data.categories.forEach(function(cat){
       const chip = document.createElement("button");
       chip.className = "chip" + (state.category === cat.id ? " active" : "");
-      chip.innerHTML = '<span class="mark">' + cat.mark + "</span>" + cat.label;
-      chip.addEventListener("click", function(){
-        state.category = cat.id;
-        renderAll();
-      });
+      chip.dataset.cat = cat.id;
+      chip.innerHTML = '<span class="mark">' + escapeHtml(cat.mark) + '</span>' + escapeHtml(cat.label);
       chipsEl.appendChild(chip);
     });
   }
@@ -231,7 +289,7 @@
     if(!prog) return "";
     const cls = prog.best >= prog.total ? "full" : "partial";
     const icon = prog.best >= prog.total ? "✓ " : "";
-    return '<span class="progress-badge ' + cls + '">' + icon + prog.best + "/" + prog.total + "</span>";
+    return '<span class="progress-badge ' + cls + '">' + icon + prog.best + "/" + prog.total + '</span>';
   }
 
   function renderList(){
@@ -267,23 +325,23 @@
         if(catInfo){
           const header = document.createElement("div");
           header.className = "list-section-header";
-          header.innerHTML = '<span class="mark">' + catInfo.mark + "</span>" + catInfo.label;
+          header.innerHTML = '<span class="mark">' + escapeHtml(catInfo.mark) + '</span>' + escapeHtml(catInfo.label);
           listEl.appendChild(header);
         }
       }
 
       const card = document.createElement("button");
       card.className = "lesson-card";
+      card.dataset.lessonId = lesson.id;
       card.innerHTML =
         '<span class="lc-left">' +
-          '<span class="lc-term">' + lesson.term + "</span>" +
-          '<span class="lc-def">' + lesson.pages[0].definition + "</span>" +
-        "</span>" +
-        '<span style="display:flex;align-items:center;">' +
-          '<span class="level-badge">' + lesson.level + "</span>" +
+          '<span class="lc-term">' + escapeHtml(lesson.term) + '</span>' +
+          '<span class="lc-def">' + escapeHtml(lesson.pages[0].definition) + '</span>' +
+        '</span>' +
+        '<span style="display:flex;align-items:center;gap:8px;flex:0 0 auto;">' +
+          '<span class="level-badge">' + escapeHtml(lesson.level) + '</span>' +
           progressBadgeHtml(lesson.id) +
-        "</span>";
-      card.addEventListener("click", function(){ openLesson(lesson); });
+        '</span>';
       listEl.appendChild(card);
     });
   }
@@ -306,15 +364,7 @@
         '<div class="pd-stat"><span class="num">' + practiced + "/" + lessons.length + '</span><span class="lbl">Denenen Ders</span></div>' +
         '<div class="pd-stat"><span class="num">' + pct + '%</span><span class="lbl">Başarı Oranı</span></div>' +
       "</div>" +
-      '<button class="pd-mix-btn" id="pdMixBtn" ' + (lessons.length === 0 ? "disabled" : "") + '>🔀 Karışık Pratik Başlat (' + Math.min(8, lessons.length) + ' ders)</button>';
-
-    const mixBtn = document.getElementById("pdMixBtn");
-    if(mixBtn){
-      mixBtn.addEventListener("click", function(){
-        const qs = buildMixedQuiz(lessons);
-        startQuiz(qs);
-      });
-    }
+      '<button id="pdMixBtn" class="pd-mix-btn"' + (lessons.length === 0 ? ' disabled' : '') + '>🎲 Karışık Alıştırma</button>';
   }
 
   function renderPracticeRows(lessons){
@@ -332,18 +382,14 @@
       const row = document.createElement("div");
       row.className = "practice-row";
       row.innerHTML =
-        '<span class="pr-term">' + lesson.term + "</span>" +
+        '<span class="pr-term">' + escapeHtml(lesson.term) + '</span>' +
         '<span style="display:flex;align-items:center;gap:8px;">' +
           progressBadgeHtml(lesson.id) +
-          '<button class="pr-btn">Başlat</button>' +
-        "</span>";
-      row.querySelector(".pr-btn").addEventListener("click", function(){
-        startQuiz(buildQuizForLesson(lesson));
-      });
+          '<button class="pr-btn" data-lesson-id="' + escapeHtml(lesson.id) + '">Alıştır</button>' +
+        '</span>';
       listEl.appendChild(row);
     });
   }
-
 
   function renderHeroNote(){
     const data = currentLangData();
@@ -395,41 +441,41 @@
     let bodyHtml = "";
 
     if(pageIndex === 0){
-      const factsHtml = page.quickFacts.map(function(f){ return "<li>" + f + "</li>"; }).join("");
+      const factsHtml = page.quickFacts.map(function(f){ return "<li>" + escapeHtml(f) + "</li>"; }).join("");
       const typesHtml = page.types.map(function(t){
-        const exHtml = t.examples.join(" &middot; ");
+        const exHtml = t.examples.map(function(ex){ return escapeHtml(ex); }).join(" · ");
         return (
           '<div class="nb-type">' +
-            '<span class="arrow">&rarr;</span>' +
-            '<span class="body">' +
-              '<span class="name">' + t.name + "</span>" +
-              '<div class="def">' + t.def + "</div>" +
+            '<span class="arrow">→</span>' +
+            '<div class="body">' +
+              '<div class="name">' + escapeHtml(t.name) + '</div>' +
+              '<div class="def">' + escapeHtml(t.def) + "</div>" +
               '<div class="ex">' + exHtml + "</div>" +
-            "</span>" +
+            "</div>" +
           "</div>"
         );
       }).join("");
 
       bodyHtml =
-        '<span class="nb-level">SEVİYE ' + lesson.level + "</span>" +
-        '<div class="nb-term-box">' + lesson.term + "</div>" +
+        '<span class="nb-level">SEVİYE ' + escapeHtml(lesson.level) + '</span>' +
+        '<h2 class="nb-term-box">' + escapeHtml(lesson.term) + "</h2>" +
         '<ul class="nb-facts">' + factsHtml + "</ul>" +
-        '<div class="nb-def">' + page.definition + "</div>" +
-        '<div class="nb-types-label">' + page.typesLabel + "</div>" +
+        '<div class="nb-def">' + escapeHtml(page.definition) + "</div>" +
+        '<div class="nb-types-label">' + escapeHtml(page.typesLabel) + "</div>" +
         typesHtml;
     } else {
-      const mistakesHtml = page.commonMistakes.map(function(m){ return "<li>" + m + "</li>"; }).join("");
-      const moreExHtml = page.moreExamples.map(function(e){ return "<li>" + e + "</li>"; }).join("");
+      const mistakesHtml = page.commonMistakes.map(function(m){ return "<li>" + escapeHtml(m) + "</li>"; }).join("");
+      const moreExHtml = page.moreExamples.map(function(e){ return "<li>" + escapeHtml(e) + "</li>"; }).join("");
 
       bodyHtml =
-        '<span class="nb-level">SEVİYE ' + lesson.level + "</span>" +
-        '<div class="nb-term-box small">' + lesson.term + "</div>" +
-        '<div class="nb-subheading">' + page.heading + "</div>" +
+        '<span class="nb-level">SEVİYE ' + escapeHtml(lesson.level) + '</span>' +
+        '<h2 class="nb-term-box small">' + escapeHtml(lesson.term) + "</h2>" +
+        '<div class="nb-subheading">' + escapeHtml(page.heading) + "</div>" +
         '<div class="nb-block-label">Sık Yapılan Hatalar</div>' +
         '<ul class="nb-mistakes">' + mistakesHtml + "</ul>" +
         '<div class="nb-block-label">Ek Örnekler</div>' +
         '<ul class="nb-more-examples">' + moreExHtml + "</ul>" +
-        '<div class="nb-tip"><span class="nb-tip-label">İpucu</span>' + page.tip + "</div>";
+        '<div class="nb-tip"><span class="nb-tip-label">İpucu</span>' + escapeHtml(page.tip) + "</div>";
     }
 
     let practiceHtml = "";
@@ -437,25 +483,27 @@
       practiceHtml =
         '<div class="nb-practice">' +
           '<span class="label">Alıştırma</span>' +
-          '<div class="q">' + lesson.practice.question + "</div>" +
-          '<button class="nb-hint-btn">İpucunu göster</button>' +
-          '<div class="nb-hint">' + lesson.practice.hint + "</div>" +
-        "</div>" +
-        '<button class="quiz-next-btn" id="startLessonQuizBtn" style="margin-top:10px;">📝 Bu Dersi Test Et</button>';
+          '<div class="q">' + escapeHtml(lesson.practice.question) + "</div>" +
+          '<button class="nb-hint-btn">💡 İpucu göster</button>' +
+          '<div class="nb-hint">' + escapeHtml(lesson.practice.hint) + "</div>" +
+          '<button id="startLessonQuizBtn" class="quiz-next-btn" style="margin-top:12px;">Alıştırmaya Başla</button>' +
+        "</div>";
     }
+
+    const dotsHtml = lesson.pages.map(function(_, i){
+      return '<span class="dot' + (i === pageIndex ? " active" : "") + '"></span>';
+    }).join("");
 
     const pagerHtml =
       '<div class="nb-pager">' +
-        '<button class="nb-pager-btn" id="nbPrev" ' + (isFirstPage ? "disabled" : "") + '>&larr; Önceki</button>' +
-        '<span class="nb-pager-dots">' +
-          lesson.pages.map(function(_, i){ return '<span class="dot' + (i === pageIndex ? " active" : "") + '"></span>'; }).join("") +
-        "</span>" +
-        '<button class="nb-pager-btn" id="nbNext" ' + (isLastPage ? "disabled" : "") + '>Sonraki &rarr;</button>' +
+        '<button id="nbPrev" class="nb-pager-btn"' + (isFirstPage ? ' disabled' : '') + '>← Önceki</button>' +
+        '<span class="nb-pager-dots">' + dotsHtml + '</span>' +
+        '<button id="nbNext" class="nb-pager-btn"' + (isLastPage ? ' disabled' : '') + '>Sonraki →</button>' +
       "</div>";
 
     notebookEl.innerHTML =
       '<div class="notebook-inner">' +
-        '<button class="nb-close" aria-label="Kapat">&times;</button>' +
+        '<button class="nb-close" aria-label="Kapat">✕</button>' +
         bodyHtml +
         practiceHtml +
         pagerHtml +
@@ -463,6 +511,7 @@
 
     notebookEl.scrollTop = 0;
 
+    // Event listeners — tek seferlik, element yeniden oluşturulduğu için güvenli
     notebookEl.querySelector(".nb-close").addEventListener("click", closeLesson);
 
     const prevBtn = notebookEl.querySelector("#nbPrev");
@@ -527,35 +576,35 @@
     quizState.answered = false;
 
     let bodyHtml =
-      '<div class="quiz-progress">Soru ' + (i + 1) + " / " + qs.length + " · " + q.lessonTerm + "</div>" +
-      '<div class="quiz-question">' + q.question + "</div>";
+      '<div class="quiz-progress">Soru ' + (i + 1) + " / " + qs.length + " · " + escapeHtml(q.lessonTerm) + "</div>" +
+      '<div class="quiz-question">' + escapeHtml(q.question) + "</div>";
 
     if(q.type === "mcq"){
-      bodyHtml += '<div class="quiz-options" id="quizOptions">' +
+      bodyHtml += '<div class="quiz-options" role="radiogroup" aria-label="Seçenekler">' +
         q.options.map(function(opt, idx){
-          return '<button class="quiz-option" data-idx="' + idx + '">' + opt + "</button>";
+          return '<button class="quiz-option" data-idx="' + idx + '" role="radio" aria-checked="false" tabindex="0">' + escapeHtml(opt) + '</button>';
         }).join("") +
-      "</div>";
+        "</div>";
     } else if(q.type === "tf"){
-      bodyHtml += '<div class="quiz-tf" id="quizTF">' +
-        '<button data-val="true">Doğru</button>' +
-        '<button data-val="false">Yanlış</button>' +
-      "</div>";
+      bodyHtml += '<div class="quiz-tf" role="radiogroup" aria-label="Doğru/Yanlış">' +
+        '<button data-val="true" role="radio" aria-checked="false" tabindex="0">Doğru</button>' +
+        '<button data-val="false" role="radio" aria-checked="false" tabindex="0">Yanlış</button>' +
+        "</div>";
     } else if(q.type === "self"){
       bodyHtml +=
-        '<button class="nb-hint-btn" id="quizRevealBtn">Cevabı Gör</button>' +
-        '<div class="quiz-self-reveal" id="quizReveal">' + q.hint + "</div>" +
-        '<div class="quiz-self-buttons" id="quizSelfButtons">' +
-          '<button data-val="true">Bildim ✓</button>' +
-          '<button data-val="false">Bilemedim ✗</button>' +
+        '<button id="quizRevealBtn" class="nb-hint-btn">Cevabı Göster</button>' +
+        '<div id="quizReveal" class="quiz-self-reveal">' + escapeHtml(q.hint) + "</div>" +
+        '<div id="quizSelfButtons" class="quiz-self-buttons">' +
+          '<button data-val="true" tabindex="0">✓ Doğru bildim</button>' +
+          '<button data-val="false" tabindex="0">✗ Yanlış bildim</button>' +
         "</div>";
     }
 
-    bodyHtml += '<button class="quiz-next-btn" id="quizNextBtn" disabled>' + (i === qs.length - 1 ? "Bitir" : "Sonraki →") + "</button>";
+    bodyHtml += '<button id="quizNextBtn" class="quiz-next-btn" disabled>Sonraki Soru →</button>';
 
     notebookEl.innerHTML =
       '<div class="notebook-inner">' +
-        '<button class="nb-close" aria-label="Kapat">&times;</button>' +
+        '<button class="nb-close" aria-label="Kapat">✕</button>' +
         bodyHtml +
       "</div>";
 
@@ -569,6 +618,7 @@
       quizState.answered = true;
       quizState.answers.push({ lessonId: q.lessonId, correct: correct });
       nextBtn.disabled = false;
+      nextBtn.textContent = (quizState.index < qs.length - 1) ? "Sonraki Soru →" : "Sonuçları Gör";
     }
 
     if(q.type === "mcq"){
@@ -580,8 +630,13 @@
           const isCorrect = chosen === q.answer;
           optButtons.forEach(function(b){
             const val = q.options[parseInt(b.dataset.idx, 10)];
-            if(val === q.answer) b.classList.add("correct");
-            else if(b === btn) b.classList.add("wrong");
+            if(val === q.answer){
+              b.classList.add("correct");
+              b.setAttribute("aria-checked", "true");
+            } else if(b === btn){
+              b.classList.add("wrong");
+            }
+            b.disabled = true;
           });
           commitAnswer(isCorrect);
         });
@@ -595,8 +650,13 @@
           const isCorrect = val === q.answer;
           tfButtons.forEach(function(b){
             const bVal = b.dataset.val === "true";
-            if(bVal === q.answer) b.classList.add("correct");
-            else if(b === btn) b.classList.add("wrong");
+            if(bVal === q.answer){
+              b.classList.add("correct");
+              b.setAttribute("aria-checked", "true");
+            } else if(b === btn){
+              b.classList.add("wrong");
+            }
+            b.disabled = true;
           });
           commitAnswer(isCorrect);
         });
@@ -629,6 +689,9 @@
     const total = answers.length;
     const correct = answers.filter(function(a){ return a.correct; }).length;
 
+    // Streak'i sadece quiz tamamlandığında güncelle
+    updateStreak();
+
     const byLesson = {};
     answers.forEach(function(a){
       if(!byLesson[a.lessonId]) byLesson[a.lessonId] = { correct: 0, total: 0 };
@@ -650,12 +713,12 @@
 
     notebookEl.innerHTML =
       '<div class="notebook-inner">' +
-        '<button class="nb-close" aria-label="Kapat">&times;</button>' +
+        '<button class="nb-close" aria-label="Kapat">✕</button>' +
         '<div class="quiz-result">' +
-          '<div class="score">' + correct + "/" + total + "</div>" +
+          '<div class="score">' + correct + "/" + total + '</div>' +
           '<div class="msg">' + msg + "</div>" +
-          '<button class="retry-btn" id="quizRetryBtn">🔁 Tekrar Dene</button>' +
-          '<button class="close-btn" id="quizCloseBtn">Kapat</button>' +
+          '<button id="quizRetryBtn" class="retry-btn">↻ Tekrar Dene</button>' +
+          '<button id="quizCloseBtn" class="close-btn">Kapat</button>' +
         "</div>" +
       "</div>";
 
@@ -679,7 +742,6 @@
     }
   });
 
-  updateStreak();
   renderAll();
 
   // ---------- PWA: service worker + install prompt ----------
